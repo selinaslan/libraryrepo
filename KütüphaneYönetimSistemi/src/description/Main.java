@@ -119,7 +119,7 @@ public class Main {
 				+ "?s library:password ?password ."
 				+ "?s foaf:name ?name." 
 				+ "?s library:email ?mail." 
-				+  "?s library:tc ?tc}";
+				+  "?s library:tc ?tc}"; 
 		
 		
 		ResultSet personResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
