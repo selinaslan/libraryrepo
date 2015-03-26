@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="windows-1254"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#" > 
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#publicationDate">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Rental">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#hasMember">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Library"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/name">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Admin"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Library"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/knows">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#rentDate">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Rental"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Book">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#hasBook">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Library"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#author">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Author"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#price">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#rentedBook">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Rental"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#read">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#renter">
+    <rdfs:range rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Rental"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#familyName">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Admin"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Member">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Library">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#dueDate">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Rental"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Author">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#Admin">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#format">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#publisher">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#password">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Admin"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#tc">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Admin"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Member"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#isbn">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#edition">
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://kutuphane.org/ontology#title">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://kutuphane.org/ontology#Book"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+</rdf:RDF>
