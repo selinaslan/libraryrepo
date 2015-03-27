@@ -18,7 +18,11 @@ import java.awt.event.ActionEvent;
 public class Yetkili extends JFrame {
 
 	private JPanel contentPane;
-	public static int id;
+	private static long id;
+
+	public long getId() {
+		return id;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +42,8 @@ public class Yetkili extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Yetkili(int id2) {
+	public Yetkili(long id2) {
+		Yetkili.id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 606, 428);
 		contentPane = new JPanel();

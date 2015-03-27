@@ -169,6 +169,10 @@ public class KutuphaneOntologyCreator {
 		passwordPrp.addDomain(adminCls);
 		emailPrp.addDomain(adminCls);
 		
+		DatatypeProperty UserNamePrp = ontModel
+				.createDatatypeProperty(OntologyConstants.USERNAME_PROPERTY_URI);
+		UserNamePrp.addDomain(adminCls);
+		UserNamePrp.addRange(XSD.xstring);
 		
 		
 		

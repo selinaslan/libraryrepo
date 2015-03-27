@@ -70,7 +70,7 @@ public class ControlGui {
 				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
 				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
 				+ "SELECT * WHERE {" + "?s foaf:name \"" + name
-				+ "\"^^xsd:string. ?s foaf:family_name \"" + surname
+				+ "\"^^xsd:string. ?s library:email ?email . ?s foaf:family_name \"" + surname
 				+ "\"^^xsd:string. ?s library:tc ?tc" + "}";
 		ResultSet resultSet = KutuphaneStore.getInstance().queryModelAsSelect(sparqlTxt);
 		while (resultSet.hasNext()) {

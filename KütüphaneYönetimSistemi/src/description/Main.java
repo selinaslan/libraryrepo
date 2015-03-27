@@ -23,21 +23,31 @@ public class Main {
 	public static void yaz (long tc){
 	
 		
-		String sparqlTxt = "PREFIX rdf:<" + RDF.getURI() + "> "
-				+"PREFIX xsd:<" + XSD.getURI() +  "> "
+		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
 				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
 				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
-				+ "SELECT * WHERE {" + "?s rdf:type foaf:Person. "
-				+ "?s foaf:family_name ?soyad ."
-				+ "?s library:password ?password ."
+				+ "SELECT * WHERE {" + "?s library:tc \"" + tc
+				+ "\"^^xsd:long." 
 				+ "?s foaf:name ?name." 
-				+ "?s library:email ?mail." 
-				+  "?s library:tc  \"" +tc+  "\"^^xsd:long. "
-						+ "?s foaf:knows ?friend. "
-						+ "?friend foaf:name ?friendName }"   ;
+				 + "}";
+				
 		
-      
-       
+		
+//		String sparqlTxt = "PREFIX rdf:<" + RDF.getURI() + "> "
+//				+"PREFIX xsd:<" + XSD.getURI() +  "> "
+//				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
+//				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+//				+ "SELECT * WHERE {" + "?s rdf:type foaf:Person. "
+//				+ "?s foaf:family_name ?soyad ."
+//				+ "?s library:password ?password ."
+//				+ "?s foaf:name ?name." 
+//				+ "?s library:email ?mail." 
+//				+  "?s library:tc  \"" +tc+  "\"^^xsd:long. "
+//						+ "?s foaf:knows ?friend. "
+//						+ "?friend foaf:name ?friendName }"   ;
+//		
+//      
+//       
 		
       
 		ResultSet ppersonResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
@@ -52,15 +62,15 @@ public class Main {
 			QuerySolution querySolution = (QuerySolution) ppersonResultSet.next();
 			String name = querySolution.getLiteral("name").getString();
 //			int tcValue = querySolution.getLiteral("tc").getInt();
-			String soyad = querySolution.getLiteral("soyad").getString();
-			String password = querySolution.getLiteral("password").getString();
-			String email = querySolution.getLiteral("mail").getString();
-			String friendName = querySolution.getLiteral("friendName").getString();
-			System.out.println(name + "    " + soyad+"    " +" sifre:"+ password + " email  :  "+ email+" friend name: "+friendName) ;
-			
+			//String soyad = querySolution.getLiteral("soyad").getString();
+			//String password = querySolution.getLiteral("password").getString();
+			//String email = querySolution.getLiteral("mail").getString();
+			//String friendName = querySolution.getLiteral("friendName").getString();
+			//System.out.println(name + "    " + soyad+"    " +" sifre:"+ password + " email  :  "+ email+" friend name: "+friendName) ;
+			System.out.println("     ad:"+ name);
 		}
 			
-			
+	
 			
 			
 			
@@ -105,9 +115,13 @@ public class Main {
 	public static void main(String[] args) {
 		
 //		KutuphaneStore.getInstance().printModel();
-	   long tcc=112;
+	   String tcc= "22222222222";
+	  long t = 112551;
 		System.out.println("sorgu baþý");
-		yaz(tcc);
+	
+		yaz(Long.parseLong(tcc));
+		
+		System.out.println("parse edilmiþ long :    "+tcc);
 		System.out.println("##################################");
 		System.out.println("sorgu sonucu");
 		
@@ -135,7 +149,7 @@ public class Main {
 			String email = querySolution.getLiteral("mail").getString();
 			
 //			System.out.println("*******************************");
-//			System.out.println(querySolution.getLiteral("tc"));
+System.out.println(querySolution.getLiteral("tc"));
 //			System.out.println("*******************************");
 			System.out.println(name + "    " + soyad+"    " + tcValue + " sifre:"+ password + " email  :  "+ email) ;
 			
@@ -144,9 +158,13 @@ public class Main {
 		
 		
 		
-		
-		
-		
+	// ilk admini ekleme	
+//		String tccc="11255146493";
+//		Model adminModel = IndividualCreator
+//				.createAdmin("Seha", "AKYOL",Long.parseLong(tccc),"12345", "seha@gmail.com", "sehoþ");
+//		
+//		KutuphaneStore.getInstance().addResourceModel(adminModel);
+//		
 		
 		
 

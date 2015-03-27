@@ -118,54 +118,53 @@ public class Kullanýcý extends JFrame {
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("\u00C7\u0131k\u0131\u015F");
 		mnNewMenu.add(mntmNewMenuItem);
+		
+				JMenu mnNewMenu_2 = new JMenu("\u0130\u015Flemler");
+				menuBar.add(mnNewMenu_2);
+				
+						JMenuItem mntmNewMenuItem_1 = new JMenuItem("Kitap Ara");
+						mntmNewMenuItem_1.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+
+								setVisible(false);
+								KitapAra kitapAra = new KitapAra(3);
+								kitapAra.setVisible(true);
+
+							}
+						});
+						mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
+
+						});
+						mnNewMenu_2.add(mntmNewMenuItem_1);
+						
+								JMenuItem mntmNewMenuItem_2 = new JMenuItem("Yazar Ara");
+								mntmNewMenuItem_2.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+
+										setVisible(false);
+										KitapAra kitapAra = new KitapAra(3);
+										kitapAra.setVisible(true);
+
+									}
+								});
+								mnNewMenu_2.add(mntmNewMenuItem_2);
+								
+										JMenuItem mntmNewMenuItem_3 = new JMenuItem("Yay\u0131nevi Ara");
+										mntmNewMenuItem_3.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent e) {
+
+												setVisible(false);
+												KitapAra kitapAra = new KitapAra(3);
+												kitapAra.setVisible(true);
+
+											}
+										});
+										mnNewMenu_2.add(mntmNewMenuItem_3);
 
 		textField = new JTextField();
 		textField.setBounds(20, 130, 130, 23);
 		contentPane.add(textField);
 		textField.setColumns(10);
-
-		JMenu mnNewMenu_2 = new JMenu("\u0130\u015Flemler");
-		mnNewMenu_2.setBounds(82, 100, 49, 19);
-		contentPane.add(mnNewMenu_2);
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Kitap Ara");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				setVisible(false);
-				KitapAra kitapAra = new KitapAra(3);
-				kitapAra.setVisible(true);
-
-			}
-		});
-		mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
-
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_1);
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Yazar Ara");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				setVisible(false);
-				KitapAra kitapAra = new KitapAra(3);
-				kitapAra.setVisible(true);
-
-			}
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_2);
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Yay\u0131nevi Ara");
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				setVisible(false);
-				KitapAra kitapAra = new KitapAra(3);
-				kitapAra.setVisible(true);
-
-			}
-		});
-		mnNewMenu_2.add(mntmNewMenuItem_3);
 
 		textField_1 = new JTextField();
 		textField_1.setBounds(160, 132, 145, 23);

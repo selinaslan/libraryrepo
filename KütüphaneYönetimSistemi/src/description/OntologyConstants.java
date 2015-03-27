@@ -27,6 +27,9 @@ public class OntologyConstants {
 	static final String TC_PROPERTY_URI = ONTOLOGY_BASE_URI + "tc";
 	static final Property TC_PROPERTY = ResourceFactory
 			.createProperty(TC_PROPERTY_URI);
+	
+	
+	
 	// ***
 	
 	static final String EMAIL_PROPERTY_URI = ONTOLOGY_BASE_URI +"email";
@@ -37,6 +40,10 @@ public class OntologyConstants {
 	static final String PASSWORD_PROPERTY_URI = ONTOLOGY_BASE_URI +"password";
 	static final Property PASSWORD_PROPERTY = ResourceFactory
 			.createProperty(PASSWORD_PROPERTY_URI);
+	
+	static final String USERNAME_PROPERTY_URI = ONTOLOGY_BASE_URI + "userName";
+	static final Property USERNAME_PROPERTY = ResourceFactory
+			.createProperty(USERNAME_PROPERTY_URI);
 	
 //	static final String FAMILYNAME_PROPERTY_URI = ONTOLOGY_BASE_URI + "familyName";
 //	static final Property FAMILYNAME_PROPERTY = ResourceFactory

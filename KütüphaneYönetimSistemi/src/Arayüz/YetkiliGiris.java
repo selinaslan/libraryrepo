@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+
+import description.ControlGui;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -74,9 +77,18 @@ public class YetkiliGiris extends JFrame {
 		JButton btnGiri = new JButton("Giri\u015F");
 		btnGiri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			setVisible(false);	
-			Yetkili yet = new Yetkili(3);
-			yet.setVisible(true);
+			
+ControlGui control = new ControlGui();
+				
+				long l = Long.parseLong(textField.getText()); 
+				System.out.println("Parsed id: "+l);
+				boolean c = control.MemberLoginControl(l, passwordField.getText());
+				
+				if(c==true){
+				setVisible(false);
+				Kullanýcý kul = new Kullanýcý(l);
+				kul.setVisible(true);}
+				
 				
 				
 			}
