@@ -1,5 +1,9 @@
 package description;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
+
+import ObjectClass.author;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -47,18 +51,53 @@ public class IndividualCreator {
 	
 	
 	
-	public static Model createBook(String isbn, String bookName, int bookCount) {
+//	public static Model createBook(String isbn, String bookName, int bookCount) {
+//		Model resourceModel = ModelFactory.createDefaultModel();
+//		Resource bookRsc = resourceModel
+//				.createResource(OntologyConstants.RESOURCE_BASE_URI + isbn);
+//		bookRsc.addProperty(RDF.type, OntologyConstants.BOOK_RSC);
+//		bookRsc.addLiteral(FOAF.name, bookName);
+//		Property bookCountPrp = ResourceFactory
+//				.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+//						+ "bookCount");
+//		bookRsc.addLiteral(bookCountPrp, bookCount);
+//		bookRsc.getProperty(bookCountPrp).changeLiteralObject((bookCount-1));
+//
+//		return resourceModel;
+//	}
+
+
+	public static Model createBook(String title, String publisher,  //ArrayList<author> authorList
+			String format, int isbn, int price, int edition,
+			String authorList, String publicationDate,int bookCount)
+	
+	{
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource bookRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + isbn);
-		bookRsc.addProperty(RDF.type, OntologyConstants.BOOK_RSC);
-		bookRsc.addLiteral(FOAF.name, bookName);
+		
+		bookRsc.addLiteral(OntologyConstants.TITLE_PROPERTY, title);
+		bookRsc.addLiteral(OntologyConstants.PUBLISHER_PROPERTY, publisher);
+		bookRsc.addLiteral(OntologyConstants.FORMAT_PROPERTY, format);
+		bookRsc.addLiteral(OntologyConstants.TC_PROPERTY, isbn);
+		bookRsc.addLiteral(OntologyConstants.PRICE_PROPERTY, price);
+		bookRsc.addLiteral(OntologyConstants.EDITION_PROPERTY, edition);
+		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY, publicationDate);
 		Property bookCountPrp = ResourceFactory
 				.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
 						+ "bookCount");
-		bookRsc.addLiteral(bookCountPrp, bookCount);
-		bookRsc.getProperty(bookCountPrp).changeLiteralObject((bookCount-1));
-
+				bookRsc.addLiteral(bookCountPrp, bookCount);
+				
+		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);
+//TODO: yazar listesi ekleme	ve count ekleme
+				
+				
+//		for(int i =0;i<authorList.size();i++)
+//			
+//		{     	
+//		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList.get(i));
+//		}	
+	
 		return resourceModel;
 	}
 

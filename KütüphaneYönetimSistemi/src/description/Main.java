@@ -178,10 +178,10 @@ System.out.println(querySolution.getLiteral("tc"));
 				+ "SELECT ?count WHERE {" 
 				+ "?book foaf:name \"Lord of the Rings\"^^xsd:string." + "?book library:bookCount ?count}";
 		//Model uyeModel = IndividualCreator.createUye(123, "Selin ASLAN");
-		Model bookModel = IndividualCreator
-				.createBook("1234", "Lord of the Rings", 15);
+//		Model bookModel = IndividualCreator
+//				.createBook("1234", "Lord of the Rings", 15);
 		//KutuphaneStore.getI0nstance().addResourceModel(uyeModel);
-		KutuphaneStore.getInstance().addResourceModel(bookModel);
+	//	KutuphaneStore.getInstance().addResourceModel(bookModel);
 		// KutuphaneStore.getInstance().printModel();
 		
 		

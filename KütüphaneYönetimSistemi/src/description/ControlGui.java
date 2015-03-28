@@ -1,11 +1,14 @@
 package description;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+
+import ObjectClass.author;
 
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
@@ -32,6 +35,30 @@ public class ControlGui {
 		if (!personResultSet.hasNext()) {
 
 			model = IndividualCreator.createUye(ad, soyad, tc, sifre, email);
+
+		}
+		return model;
+	}
+	
+	
+	
+	public Model CreateBook(String title, String publisher, String format, int isbn,   //ArrayList<author>
+			int price, int edition, String authorList,
+			String publicationDate , int bookCount) {
+
+		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
+				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
+				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+				+ "SELECT ?isbn WHERE {" + "?s library:isbn \"" + isbn
+				+ "\"^^xsd:int." + "}";
+
+		ResultSet bookResultSet = KutuphaneStore.getInstance()
+				.queryModelAsSelect(sparqlTxt);
+
+		Model model = null;
+		if (!bookResultSet.hasNext()) {
+
+			model = IndividualCreator.createBook(title, publisher, format, isbn, price, edition, authorList, publicationDate, bookCount);
 
 		}
 		return model;

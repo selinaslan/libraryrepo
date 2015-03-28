@@ -90,8 +90,9 @@ public class KutuphaneOntologyCreator {
 		DatatypeProperty publicationDatePrp = ontModel
 				.createDatatypeProperty(OntologyConstants.PUBLICDATE_PROPERTY_URI);
 		publicationDatePrp.addDomain(bookCls);
-		publicationDatePrp.addRange(ResourceFactory
-				.createResource(XSDDatatype.XSDdateTime.getURI()));
+		publisherPrp.addRange(XSD.xstring);
+//		publicationDatePrp.addRange(ResourceFactory
+//				.createResource(XSDDatatype.XSDdateTime.getURI()));
 		// Calendar calendar = Calendar.getInstance();
 		// calendar.set(year, month, date);
 
