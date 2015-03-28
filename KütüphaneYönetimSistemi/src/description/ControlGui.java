@@ -43,7 +43,7 @@ public class ControlGui {
 	
 	
 	public Model CreateBook(String title, String publisher, String format, int isbn,   //ArrayList<author>
-			int price, int edition, String authorList,
+			int price, int edition, 
 			String publicationDate , int bookCount) {
 
 		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
@@ -58,7 +58,7 @@ public class ControlGui {
 		Model model = null;
 		if (!bookResultSet.hasNext()) {
 
-			model = IndividualCreator.createBook(title, publisher, format, isbn, price, edition, authorList, publicationDate, bookCount);
+			model = IndividualCreator.createBook(title, publisher, format, isbn, price, edition, publicationDate, bookCount);
 
 		}
 		return model;
@@ -113,7 +113,25 @@ public class ControlGui {
 	}
 
 	
-	public  DefaultListModel ListeDoldur(List<Resource> friendList){
+	public  DefaultListModel BookListFill(List<Resource> bookList){
+		
+		DefaultListModel listModel = new DefaultListModel<Resource>();
+		
+		 for(int i =0;i<bookList.size();i++)
+		 {
+			 listModel.addElement( bookList.get(i).getProperty(
+						ResourceFactory
+						.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+								+ "title")).getObject().asLiteral().getString() );	
+			 
+			 
+		 }
+		
+		
+		return listModel;
+	}
+	
+public  DefaultListModel ListeDoldur(List<Resource> friendList){
 		
 		DefaultListModel listModel = new DefaultListModel<Resource>();
 		
@@ -135,6 +153,31 @@ public class ControlGui {
 		
 		
 		return listModel;
+	}
+	
+	public Vector<Resource> searchBookbyName(String title){
+		Vector<Resource> bookList = new Vector<Resource>();
+		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
+				+ "PREFIX library:<"
+				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+				+ "SELECT * WHERE {"  
+				+ "?s library:title \"" + title+ "\"^^xsd:string." 	
+				+"}";
+
+		
+		ResultSet bookResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
+				sparqlTxt);
+		
+		 
+		while (bookResultSet.hasNext()) {
+			
+			QuerySolution querySolution = (QuerySolution) bookResultSet.next();
+			Resource resource = querySolution.getResource("s");
+			bookList.add(resource);
+		}
+		
+		return bookList;
+		
 	}
 	
 	

@@ -112,16 +112,54 @@ public class Main {
 	
 	
 	
+public static void kitapYaz (int isbn){
+	
+		
+		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
+//				
+				+ "PREFIX library:<"
+				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+				+ "SELECT * WHERE {"  
+				+ " ?s library:title ?title."
+				+ " ?s library:isbn ?b."
+				+"}";
+
+		
+		ResultSet kitapResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
+				sparqlTxt);
+		
+		 System.out.println(sparqlTxt);
+		 
+		while (kitapResultSet.hasNext()) {
+			System.out.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  ");
+			QuerySolution querySolution = (QuerySolution) kitapResultSet.next();
+			String title = querySolution.getLiteral("title").getString();
+			int isbnn = querySolution.getLiteral("b").getInt();
+			System.out.println("     kitap:"+ title+"    "+ isbnn );
+		}
+		
+		 
+	 }
+
+
+
 	public static void main(String[] args) {
 		
 //		KutuphaneStore.getInstance().printModel();
 	   String tcc= "10856213714";
 	  long t = 112551;
 		System.out.println("sorgu baþý");
+		
+		
 	
 		yaz(Long.parseLong(tcc));
 		
 		System.out.println("parse edilmiþ long :    "+tcc);
+		
+		String is="123";
+		kitapYaz(Integer.parseInt(is));
+		
+		
 		System.out.println("##################################");
 		System.out.println("sorgu sonucu");
 		
@@ -153,12 +191,41 @@ public class Main {
 			String friend = querySolution.getLiteral("friendName").getString();
 			String friendm = querySolution.getLiteral("friendMail").getString();
 //			System.out.println("*******************************");
-System.out.println(querySolution.getLiteral("tc"));
+            System.out.println(querySolution.getLiteral("tc"));
 //			System.out.println("*******************************");
 			System.out.println(name + "    " + soyad+"    " + tcValue + " sifre:"+ password + " email  :  "+ email + "   arkadaþý: "+friend+"    :"+friendm) ;
 			
 			
 		}
+		
+		
+		String sparqlKitap ="PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
+				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
+				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+					+ "SELECT * WHERE {" + "?s library:title ?title. "
+					+ "?s library:isbn ?isbn ."
+				
+					+  "}"; 
+			
+			
+			ResultSet bookkResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
+					sparqlKitap);
+			
+			System.out.println("kitaplarýn hepsini sorgula^^^^^^^^^^^^^^^^^^");
+			
+//			while (bookkResultSet.hasNext()) {
+//				QuerySolution querySolution = (QuerySolution) bookkResultSet.next();
+//				String title = querySolution.getLiteral("title").getString();
+//				int isbn = querySolution.getLiteral("isbn").getInt();
+//			//	String authorList = querySolution.getLiteral("authorList").getString();
+//				String publicationDate = querySolution.getLiteral("publicationDate").getString();
+//				int bookCount = querySolution.getLiteral("bookCount").getInt();
+//	            System.out.println(querySolution.getLiteral("isbn"));
+//				System.out.println(title + "    " + isbn+"    "  +  " Date  :  " + "   adet: " ) ;
+				
+				
+			}
+	
 		
 		
 		
@@ -172,25 +239,8 @@ System.out.println(querySolution.getLiteral("tc"));
 		
 		
 
-		String bookQuery = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
-				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
-				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
-				+ "SELECT ?count WHERE {" 
-				+ "?book foaf:name \"Lord of the Rings\"^^xsd:string." + "?book library:bookCount ?count}";
-		//Model uyeModel = IndividualCreator.createUye(123, "Selin ASLAN");
-//		Model bookModel = IndividualCreator
-//				.createBook("1234", "Lord of the Rings", 15);
-		//KutuphaneStore.getI0nstance().addResourceModel(uyeModel);
-	//	KutuphaneStore.getInstance().addResourceModel(bookModel);
-		// KutuphaneStore.getInstance().printModel();
-		
-		
-		ResultSet bookResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
-				bookQuery);
-		while (bookResultSet.hasNext()) {
-			QuerySolution querySolution = (QuerySolution) bookResultSet.next();
-			int count = querySolution.getLiteral("count").getInt();
-			System.out.println("Book count: " + count);
-		}
-	}
+	
+	
+	
+	
 }

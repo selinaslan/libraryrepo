@@ -35,17 +35,17 @@ public class IndividualCreator {
 	
 	public static Model createAdmin(String ad , String soyad , long tc , String sifre , String email , String userName) {
 		Model resourceModel = ModelFactory.createDefaultModel();
-		Resource uyeRsc = resourceModel
+		Resource adminRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + tc);
-		uyeRsc.addProperty(RDF.type, FOAF.Person);
-		uyeRsc.addLiteral(FOAF.name, ad);
-		uyeRsc.addLiteral(FOAF.family_name, soyad);
-		uyeRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, sifre);
-		uyeRsc.addLiteral(OntologyConstants.TC_PROPERTY, new Long(tc));
-		uyeRsc.addLiteral(OntologyConstants.EMAIL_PROPERTY, email);
-		uyeRsc.addLiteral(OntologyConstants.USERNAME_PROPERTY, userName);
+		adminRsc.addProperty(RDF.type, FOAF.Person);
+		adminRsc.addLiteral(FOAF.name, ad);
+		adminRsc.addLiteral(FOAF.family_name, soyad);
+		adminRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, sifre);
+		adminRsc.addLiteral(OntologyConstants.TC_PROPERTY, new Long(tc));
+		adminRsc.addLiteral(OntologyConstants.EMAIL_PROPERTY, email);
+		adminRsc.addLiteral(OntologyConstants.USERNAME_PROPERTY, userName);
 		// TODO: book'ta kullanýlacak
-		 uyeRsc.addProperty(RDF.type, OntologyConstants.ADMIN_RSC);
+		adminRsc.addProperty(RDF.type, OntologyConstants.ADMIN_RSC);
 		return resourceModel;
 	}
 	
@@ -69,7 +69,7 @@ public class IndividualCreator {
 
 	public static Model createBook(String title, String publisher,  //ArrayList<author> authorList
 			String format, int isbn, int price, int edition,
-			String authorList, String publicationDate,int bookCount)
+			String publicationDate,int bookCount)
 	
 	{
 		Model resourceModel = ModelFactory.createDefaultModel();
@@ -79,7 +79,7 @@ public class IndividualCreator {
 		bookRsc.addLiteral(OntologyConstants.TITLE_PROPERTY, title);
 		bookRsc.addLiteral(OntologyConstants.PUBLISHER_PROPERTY, publisher);
 		bookRsc.addLiteral(OntologyConstants.FORMAT_PROPERTY, format);
-		bookRsc.addLiteral(OntologyConstants.TC_PROPERTY, isbn);
+		bookRsc.addLiteral(OntologyConstants.ISBN_PROPERTY, isbn);
 		bookRsc.addLiteral(OntologyConstants.PRICE_PROPERTY, price);
 		bookRsc.addLiteral(OntologyConstants.EDITION_PROPERTY, edition);
 		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY, publicationDate);
@@ -88,7 +88,7 @@ public class IndividualCreator {
 						+ "bookCount");
 				bookRsc.addLiteral(bookCountPrp, bookCount);
 				
-		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);
+		//bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);
 //TODO: yazar listesi ekleme	ve count ekleme
 				
 				

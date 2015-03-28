@@ -259,7 +259,7 @@ public class Kullanýcý extends JFrame {
 
 		JButton btnEkle = new JButton("Ekle");
 		btnEkle.addActionListener(new ActionListener() {
-			
+		//TODO: kiþi ekle fonksiyonu yok	
 			public void actionPerformed(ActionEvent arg0) { // Seçilen kiþi arkadaþ olarak eklenir
 				
 				
