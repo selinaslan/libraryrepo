@@ -46,8 +46,8 @@ public class Main {
 //						+ "?s foaf:knows ?friend. "
 //						+ "?friend foaf:name ?friendName }"   ;
 //		
-//      
-//       
+      
+       
 		
       
 		ResultSet ppersonResultSet = KutuphaneStore.getInstance().queryModelAsSelect(
@@ -115,7 +115,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 //		KutuphaneStore.getInstance().printModel();
-	   String tcc= "22222222222";
+	   String tcc= "10856213714";
 	  long t = 112551;
 		System.out.println("sorgu baþý");
 	
@@ -132,7 +132,10 @@ public class Main {
 				+ "?s foaf:family_name ?soyad ."
 				+ "?s library:password ?password ."
 				+ "?s foaf:name ?name." 
-				+ "?s library:email ?mail." 
+				+ "?s library:email ?mail."
+				+ "?s foaf:knows ?friend. "
+				+ "?friend foaf:name ?friendName ."
+				+ "?friend library:email ?friendMail ."
 				+  "?s library:tc ?tc}"; 
 		
 		
@@ -147,11 +150,12 @@ public class Main {
 			String soyad = querySolution.getLiteral("soyad").getString();
 			String password = querySolution.getLiteral("password").getString();
 			String email = querySolution.getLiteral("mail").getString();
-			
+			String friend = querySolution.getLiteral("friendName").getString();
+			String friendm = querySolution.getLiteral("friendMail").getString();
 //			System.out.println("*******************************");
 System.out.println(querySolution.getLiteral("tc"));
 //			System.out.println("*******************************");
-			System.out.println(name + "    " + soyad+"    " + tcValue + " sifre:"+ password + " email  :  "+ email) ;
+			System.out.println(name + "    " + soyad+"    " + tcValue + " sifre:"+ password + " email  :  "+ email + "   arkadaþý: "+friend+"    :"+friendm) ;
 			
 			
 		}

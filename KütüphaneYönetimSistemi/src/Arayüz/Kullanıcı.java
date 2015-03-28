@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -31,6 +33,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+import org.w3c.dom.NameList;
 
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
@@ -40,15 +43,22 @@ import description.ControlGui;
 import description.KutuphaneStore;
 import description.OntologyConstants;
 
+import javax.swing.border.MatteBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.AbstractListModel;
+
+import java.awt.event.MouseEvent;
+
 public class Kullanýcý extends JFrame {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3716616696273284642L;
+	//private static final long serialVersionUID = -3716616696273284642L;
 	private JPanel contentPane;
 	private static long id;
-
+     List<Resource> friendList = new ArrayList<Resource>();
+     int index=0;
 	public long getId() {
 		return id;
 	}
@@ -80,7 +90,7 @@ public class Kullanýcý extends JFrame {
 	public Kullanýcý(long id2) {
 		Kullanýcý.id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 606, 428);
+		setBounds(200, 200, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,7 +104,7 @@ public class Kullanýcý extends JFrame {
 		contentPane.add(HeaderLabel);
 
 		JLabel KullaniciAdiLabel = new JLabel("Ho\u015Fgeldiniz say\u0131n....");
-		KullaniciAdiLabel.setBounds(0, 367, 590, 23);
+		KullaniciAdiLabel.setBounds(0, 539, 590, 23);
 		contentPane.add(KullaniciAdiLabel);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -162,30 +172,53 @@ public class Kullanýcý extends JFrame {
 										mnNewMenu_2.add(mntmNewMenuItem_3);
 
 		textField = new JTextField();
-		textField.setBounds(20, 130, 130, 23);
+		textField.setBounds(629, 103, 145, 23);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(160, 132, 145, 23);
+		textField_1.setBounds(629, 137, 145, 23);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		// friend ekleme için
-		final List<Resource> friendList = new ArrayList<Resource>();
-		Resource friend = null;
+		
+		JList namelist = new JList();
+		namelist.addMouseListener(new MouseAdapter() {
+			
+			
+			
+			public void mouseClicked(MouseEvent arg0) { //Seçilen elemanýn indeksini bulur.
+		
+				index =namelist.locationToIndex(arg0.getPoint());
+				
+			}
+		});
+		namelist.setBounds(539, 221, 235, 77);
+		contentPane.add(namelist);
+		
+		
+		
+		
+		//Resource friend = null;
 
-		JButton btnAra = new JButton("Ara");
-		btnAra.addActionListener(new ActionListener() {
+		JButton btnAra = new JButton("Ara"); 
+		btnAra.addActionListener(new ActionListener() {  // Adý ve Soyadý textfield lardan alýr eve aramak çin ilgili methota yollar.
 			public void actionPerformed(ActionEvent arg0) {
 
 				String name = textField.getText();
 				String surname = textField_1.getText();
 				Vector<Resource> users = new ControlGui().queryForFriends(name,
 						surname);
-				// list = new JList<Resource>(users);
+				
+				
+			//	 list = new JList<Resource>(users);
+				Resource userRsc=null;
 				for (int i = 0; i < users.size(); i++) {
-					Resource userRsc = users.get(i);
+					 userRsc = users.get(i);
 					// friend eklemek için düzeltilecek
+					
+					
+					
 					friendList.add(userRsc);
 					System.out.println(userRsc
 							.getProperty(
@@ -193,41 +226,78 @@ public class Kullanýcý extends JFrame {
 											.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
 													+ "tc")).getObject()
 							.asLiteral().getLong());
+					
+					
+//					friendList.get(0).getProperty(
+//							ResourceFactory
+//							.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+//									+ "tc")).getObject()
+//			.asLiteral().getLong();
+	
+											
 					// list.add(new Checkbox(
 					// userRsc.getPropertyResourceValue(FOAF.name)
 					// + " "
 					// + userRsc
 					// .getPropertyResourceValue(FOAF.family_name),
 					// false));
+					
+					
 				}
-
+				
+			
+				
+				namelist.setModel(new ControlGui().ListeDoldur(friendList));
+		
+				
 			}
+			
 		});
-
-		btnAra.setBounds(383, 130, 89, 23);
+  
+		btnAra.setBounds(685, 171, 89, 23);
 		contentPane.add(btnAra);
 
 		JButton btnEkle = new JButton("Ekle");
 		btnEkle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			
+			public void actionPerformed(ActionEvent arg0) { // Seçilen kiþi arkadaþ olarak eklenir
+				
+				
+				
+				
 				KutuphaneStore
 						.getInstance()
 						.addStatement(
 								ResourceFactory
 										.createResource(OntologyConstants.RESOURCE_BASE_URI
 												+ Kullanýcý.id), FOAF.knows,
-								friendList.get(0));
+								friendList.get(index));
+				
+				JOptionPane.showMessageDialog(null,
+						"Arkadaþýnýz takibe alýnmýþtýr.");
+				
+				textField.setText("");
+				textField_1.setText("");
+				//TODO: listeyi sil
+		        				
 			}
+			
+			
+			
+			
 		});
-		btnEkle.setBounds(383, 248, 89, 23);
+		btnEkle.setBounds(685, 339, 89, 23);
 		contentPane.add(btnEkle);
 		
-		JLabel label = new JLabel(Kullanýcý.id+"");
 		
-		label.setBounds(35, 211, 46, 14);
-		contentPane.add(label);
+		
+		
+		
+		
+		
+	
+		
 
-		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(
-				new Component[] { HeaderLabel }));
+		
 	}
 }

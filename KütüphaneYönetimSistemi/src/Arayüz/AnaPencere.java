@@ -113,7 +113,7 @@ public class AnaPencere {
 				
 				if(c==true){
 				frame.setVisible(false);
-				Yetkili kul = new Yetkili(l);
+				Kullanýcý kul = new Kullanýcý(l);
 				kul.setVisible(true);}
 				
 			}
