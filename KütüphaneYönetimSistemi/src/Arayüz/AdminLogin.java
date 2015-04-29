@@ -18,11 +18,11 @@ import description.ControlGui;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class YetkiliGiris extends JFrame {
+public class AdminLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField userNameTextField;
+	private JPasswordField passwordTextField;
 	public static int id;
 	/**
 	 * Launch the application.
@@ -31,7 +31,7 @@ public class YetkiliGiris extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					YetkiliGiris frame = new YetkiliGiris(id);
+					AdminLogin frame = new AdminLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class YetkiliGiris extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public YetkiliGiris(int id2) {
+	public AdminLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 606, 428);
 		contentPane = new JPanel();
@@ -57,44 +57,44 @@ public class YetkiliGiris extends JFrame {
 		HeaderLabel.setBounds(0, 0, 590, 42);
 		contentPane.add(HeaderLabel);
 		
-		JLabel lblKullancAd = new JLabel("Kullan\u0131c\u0131 Ad\u0131:");
-		lblKullancAd.setBounds(399, 148, 106, 14);
-		contentPane.add(lblKullancAd);
+		JLabel userNameLabel = new JLabel("Kullan\u0131c\u0131 Ad\u0131:");
+		userNameLabel.setBounds(399, 148, 106, 14);
+		contentPane.add(userNameLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(399, 178, 106, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		userNameTextField = new JTextField();
+		userNameTextField.setBounds(399, 178, 106, 20);
+		contentPane.add(userNameTextField);
+		userNameTextField.setColumns(10);
 		
-		JLabel lblifre = new JLabel("\u015Eifre:");
-		lblifre.setBounds(399, 225, 46, 14);
-		contentPane.add(lblifre);
+		JLabel passwordLabel = new JLabel("\u015Eifre:");
+		passwordLabel.setBounds(399, 225, 46, 14);
+		contentPane.add(passwordLabel);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(399, 265, 106, 20);
-		contentPane.add(passwordField);
+		passwordTextField = new JPasswordField();
+		passwordTextField.setBounds(399, 265, 106, 20);
+		contentPane.add(passwordTextField);
 		
-		JButton btnGiri = new JButton("Giri\u015F");
-		btnGiri.addActionListener(new ActionListener() {
+		JButton loginButton = new JButton("Giri\u015F");
+		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-ControlGui control = new ControlGui();
+        ControlGui control = new ControlGui();
 				
-				long l = Long.parseLong(textField.getText()); 
+				long l = Long.parseLong(userNameTextField.getText()); 
 				System.out.println("Parsed id: "+l);
-				boolean c = control.MemberLoginControl(l, passwordField.getText());
+				boolean c = control.MemberLoginControl(l, passwordTextField.getText());
 				
 				if(c==true){
 				setVisible(false);
-				Kullanýcý kul = new Kullanýcý(l);
-				kul.setVisible(true);}
+				Admin admn = new Admin(l);
+				admn.setVisible(true);}
 				
 				
 				
 			}
 		});
-		btnGiri.setBounds(473, 337, 89, 23);
-		contentPane.add(btnGiri);
+		loginButton.setBounds(473, 337, 89, 23);
+		contentPane.add(loginButton);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		Image img2= new ImageIcon(this.getClass().getResource("/Admin-icon.png")).getImage();

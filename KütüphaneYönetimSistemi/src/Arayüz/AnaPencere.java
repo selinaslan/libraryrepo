@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
 public class AnaPencere {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField userNameTextField;
 	private JPasswordField passwordField;
 
 	/**
@@ -67,76 +67,71 @@ public class AnaPencere {
 		
 		JLabel HeaderLabel = new JLabel("");
 		HeaderLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				
-				JOptionPane.showMessageDialog(null, "Ana sayfaya dönüþ koy");
-			}
+			
 		});
 		Image img= new ImageIcon(this.getClass().getResource("/Header.jpg")).getImage();
 		HeaderLabel.setIcon(new ImageIcon(img));
 		HeaderLabel.setBounds(0, 0, 590, 68);
 		frame.getContentPane().add(HeaderLabel);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(422, 93, 168, 203);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel loginPanel = new JPanel();
+		loginPanel.setBounds(422, 93, 168, 203);
+		frame.getContentPane().add(loginPanel);
+		loginPanel.setLayout(null);
 		
 		JLabel lblyeGirii = new JLabel("\u00DCye Giri\u015Fi:");
 		lblyeGirii.setBounds(10, 11, 58, 14);
-		panel.add(lblyeGirii);
+		loginPanel.add(lblyeGirii);
 		
 		JLabel lblKullancAd = new JLabel("Kullan\u0131c\u0131 Ad\u0131:");
 		lblKullancAd.setBounds(10, 36, 66, 14);
-		panel.add(lblKullancAd);
+		loginPanel.add(lblKullancAd);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 61, 107, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		userNameTextField = new JTextField();
+		userNameTextField.setBounds(10, 61, 107, 20);
+		loginPanel.add(userNameTextField);
+		userNameTextField.setColumns(10);
 		
 		JLabel lblifre = new JLabel("\u015Eifre:");
 		lblifre.setBounds(10, 95, 46, 14);
-		panel.add(lblifre);
+		loginPanel.add(lblifre);
 		
-		JButton btnGiri = new JButton("Giri\u015F");
-		btnGiri.addActionListener(new ActionListener() {
+		JButton enterButton = new JButton("Giri\u015F");
+		enterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				ControlGui control = new ControlGui();
 				
-				long l = Long.parseLong(textField.getText()); 
+				long l = Long.parseLong(userNameTextField.getText()); 
 				System.out.println("Parsed id: "+l);
 				boolean c = control.MemberLoginControl(l, passwordField.getText());
 				
 				if(c==true){
 				frame.setVisible(false);
-				Kullanýcý kul = new Kullanýcý(l);
+				User kul = new User(l);
 				kul.setVisible(true);}
 				
 			}
 		});
-		btnGiri.setBounds(81, 178, 77, 14);
-		panel.add(btnGiri);
+		enterButton.setBounds(81, 178, 77, 14);
+		loginPanel.add(enterButton);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(10, 120, 107, 21);
-		panel.add(passwordField);
+		loginPanel.add(passwordField);
 		
-		JLabel lblAdminGirii = new JLabel("Admin Giri\u015Fi");
-		lblAdminGirii.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblAdminGirii.addMouseListener(new MouseAdapter() {
+		JLabel adminLabel = new JLabel("Admin Giri\u015Fi");
+		adminLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		adminLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				YetkiliGiris kulgir = new YetkiliGiris(3);
+				AdminLogin kulgir = new AdminLogin();
 				kulgir.setVisible(true);
 			}
 		});
-		lblAdminGirii.setBounds(518, 68, 72, 14);
-		frame.getContentPane().add(lblAdminGirii);
+		adminLabel.setBounds(518, 68, 72, 14);
+		frame.getContentPane().add(adminLabel);
 		
 		
 	}

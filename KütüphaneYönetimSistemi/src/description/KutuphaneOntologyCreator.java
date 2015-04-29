@@ -1,4 +1,4 @@
-package description;
+ package description;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,16 +29,7 @@ public class KutuphaneOntologyCreator {
 				.createOntologyModel(OntModelSpec.OWL_MEM);
 		Ontology kutuphaneOntology = ontModel
 				.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
-		// Ontology memberOntology =
-		// ontModel.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
-		// Ontology bookOntology =
-		// ontModel.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
-		// Ontology adminOntology =
-		// ontModel.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
-		// Ontology rentOntology =
-		// ontModel.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
-		// Ontology authorOntology =
-		// ontModel.createOntology(OntologyConstants.ONTOLOGY_BASE_URI);
+		
 		// class tanýmlarý
 		OntClass libraryCls = ontModel
 				.createClass(OntologyConstants.LIBRARY_URI);
@@ -91,7 +82,7 @@ public class KutuphaneOntologyCreator {
 				.createDatatypeProperty(OntologyConstants.PUBLICDATE_PROPERTY_URI);
 		publicationDatePrp.addDomain(bookCls);
 		publisherPrp.addRange(XSD.xstring);
-//		publicationDatePrp.addRange(ResourceFactory
+//TODO		publicationDatePrp.addRange(ResourceFactory
 //				.createResource(XSDDatatype.XSDdateTime.getURI()));
 		// Calendar calendar = Calendar.getInstance();
 		// calendar.set(year, month, date);
@@ -154,11 +145,11 @@ public class KutuphaneOntologyCreator {
 		friendPrp.addRange(memberCls);
 		
 	// TODO:	
-		ObjectProperty bookListPrp = ontModel
+	/*	ObjectProperty bookListPrp = ontModel
 				.createObjectProperty(OntologyConstants.ONTOLOGY_BASE_URI
 						+ "read");
 		bookListPrp.addDomain(memberCls);
-		bookListPrp.addRange(bookCls);
+		bookListPrp.addRange(bookCls);*/
 		
 		
 		
@@ -187,7 +178,7 @@ public class KutuphaneOntologyCreator {
 
 		titlePrp.addDomain(rentalCls);
 		
-//		ObjectProperty rentBookNamePrp = ontModel
+//TODO		ObjectProperty rentBookNamePrp = ontModel
 //				.createObjectProperty(OntologyConstants.RENTBOOK_PROPERTY_URI);
 //		rentBookNamePrp.addDomain(rentalCls);
 //		rentBookNamePrp.addRange(bookCls);

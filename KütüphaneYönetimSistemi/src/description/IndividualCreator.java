@@ -16,59 +16,41 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class IndividualCreator {
 	
 	
-	public static Model createUye(String ad , String soyad , long tc , String sifre , String email) {
+	public static Model createMember(String name , String familyName , long tc , String password , String email) {
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource uyeRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + tc);
 		uyeRsc.addProperty(RDF.type, FOAF.Person);
-		uyeRsc.addLiteral(FOAF.name, ad);
-		uyeRsc.addLiteral(FOAF.family_name, soyad);
-		uyeRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, sifre);
+		uyeRsc.addLiteral(FOAF.name, name);
+		uyeRsc.addLiteral(FOAF.family_name, familyName);
+		uyeRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, password);
 		uyeRsc.addLiteral(OntologyConstants.TC_PROPERTY, new Long(tc));
 		uyeRsc.addLiteral(OntologyConstants.EMAIL_PROPERTY, email);
 
-		// TODO: book'ta kullanýlacak
-		// uyeRsc.addProperty(RDF.type, OntologyConstants.BOOK_RSC);
 		return resourceModel;
 	}
 
 	
-	public static Model createAdmin(String ad , String soyad , long tc , String sifre , String email , String userName) {
+	public static Model createAdmin(String name , String familyName , long tc , String password , String email , String userName) {
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource adminRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + tc);
 		adminRsc.addProperty(RDF.type, FOAF.Person);
-		adminRsc.addLiteral(FOAF.name, ad);
-		adminRsc.addLiteral(FOAF.family_name, soyad);
-		adminRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, sifre);
+		adminRsc.addLiteral(FOAF.name, name);
+		adminRsc.addLiteral(FOAF.family_name, familyName);
+		adminRsc.addLiteral(OntologyConstants.PASSWORD_PROPERTY, password);
 		adminRsc.addLiteral(OntologyConstants.TC_PROPERTY, new Long(tc));
 		adminRsc.addLiteral(OntologyConstants.EMAIL_PROPERTY, email);
 		adminRsc.addLiteral(OntologyConstants.USERNAME_PROPERTY, userName);
-		// TODO: book'ta kullanýlacak
 		adminRsc.addProperty(RDF.type, OntologyConstants.ADMIN_RSC);
 		return resourceModel;
 	}
 	
 	
 	
-//	public static Model createBook(String isbn, String bookName, int bookCount) {
-//		Model resourceModel = ModelFactory.createDefaultModel();
-//		Resource bookRsc = resourceModel
-//				.createResource(OntologyConstants.RESOURCE_BASE_URI + isbn);
-//		bookRsc.addProperty(RDF.type, OntologyConstants.BOOK_RSC);
-//		bookRsc.addLiteral(FOAF.name, bookName);
-//		Property bookCountPrp = ResourceFactory
-//				.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
-//						+ "bookCount");
-//		bookRsc.addLiteral(bookCountPrp, bookCount);
-//		bookRsc.getProperty(bookCountPrp).changeLiteralObject((bookCount-1));
-//
-//		return resourceModel;
-//	}
 
-
-	public static Model createBook(String title, String publisher,  //ArrayList<author> authorList
-			String format, int isbn, int price, int edition,
+	public static Model createBook(String title, String publisher ,
+			String format, int isbn, int price, int edition, String author,
 			String publicationDate,int bookCount)
 	
 	{
@@ -83,6 +65,7 @@ public class IndividualCreator {
 		bookRsc.addLiteral(OntologyConstants.PRICE_PROPERTY, price);
 		bookRsc.addLiteral(OntologyConstants.EDITION_PROPERTY, edition);
 		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY, publicationDate);
+		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, author);
 		Property bookCountPrp = ResourceFactory
 				.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
 						+ "bookCount");

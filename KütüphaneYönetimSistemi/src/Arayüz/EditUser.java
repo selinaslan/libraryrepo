@@ -12,15 +12,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+
+import description.ControlGui;
+import description.OntologyConstants;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+
 public class EditUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-
+	private JTextField tcNoTextField;
+	private JTextField nameTextField;
+	private JTextField familtNameTextField;
+	private JTextField passwordTextField;
+	private JTextField eMailTextField;
+    static  Resource userRsc=null;
 	/**
 	 * Launch the application.
 	 */
@@ -55,22 +66,23 @@ public class EditUser extends JFrame {
 		contentPane.add(HeaderLabel);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(34, 85, 515, 87);
+		panel.setBounds(21, 83, 515, 87);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblDzenlemekIstediinizyenin = new JLabel("D\u00FCzenlemek  istedi\u011Finiz \u00FCyenin TC Kimlik Numaras\u0131n\u0131 giriniz:");
-		lblDzenlemekIstediinizyenin.setBounds(10, 11, 443, 22);
-		panel.add(lblDzenlemekIstediinizyenin);
+		JLabel label = new JLabel("D\u00FCzenlemek  istedi\u011Finiz \u00FCyenin TC Kimlik Numaras\u0131n\u0131 giriniz:");
+		label.setBounds(10, 11, 443, 22);
+		panel.add(label);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 44, 208, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		tcNoTextField = new JTextField();
+		tcNoTextField.setBounds(10, 44, 208, 20);
+		panel.add(tcNoTextField);
+		tcNoTextField.setColumns(10);
 		
-		JButton btnBul = new JButton("Bul");
-		btnBul.setBounds(337, 43, 89, 23);
-		panel.add(btnBul);
+		JButton findButton = new JButton("Bul");
+	
+		findButton.setBounds(337, 43, 89, 23);
+		panel.add(findButton);
 		
 		JLabel lblAd = new JLabel("Ad\u0131:");
 		lblAd.setBounds(34, 220, 46, 14);
@@ -88,44 +100,107 @@ public class EditUser extends JFrame {
 		lblEposta.setBounds(34, 342, 46, 14);
 		contentPane.add(lblEposta);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(158, 220, 139, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lbl = new JLabel("");
+		lbl.setBounds(109, 220, 139, 14);
+		contentPane.add(lbl);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(158, 261, 112, 14);
-		contentPane.add(lblNewLabel_1);
+		JLabel lbl2 = new JLabel("");
+		lbl2.setBounds(109, 261, 139, 14);
+		contentPane.add(lbl2);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(158, 299, 139, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel lbl3 = new JLabel("");
+		lbl3.setBounds(109, 299, 139, 14);
+		contentPane.add(lbl3);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(158, 342, 112, 14);
-		contentPane.add(lblNewLabel_3);
+		JLabel lbl4 = new JLabel("");
+		lbl4.setBounds(109, 342, 139, 14);
+		contentPane.add(lbl4);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(294, 217, 139, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		nameTextField = new JTextField();
+		nameTextField.setBounds(297, 217, 152, 20);
+		contentPane.add(nameTextField);
+		nameTextField.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(294, 258, 139, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		familtNameTextField = new JTextField();
+		familtNameTextField.setBounds(297, 258, 152, 20);
+		contentPane.add(familtNameTextField);
+		familtNameTextField.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(294, 296, 139, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		passwordTextField = new JTextField();
+		passwordTextField.setBounds(297, 296, 152, 20);
+		contentPane.add(passwordTextField);
+		passwordTextField.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(293, 339, 140, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		eMailTextField = new JTextField();
+		eMailTextField.setBounds(297, 339, 153, 20);
+		contentPane.add(eMailTextField);
+		eMailTextField.setColumns(10);
 		
-		JButton btnDzenle = new JButton("D\u00FCzenle");
-		btnDzenle.setBounds(479, 338, 89, 23);
-		contentPane.add(btnDzenle);
+		JButton editButton = new JButton("D\u00FCzenle");
+		
+		editButton.setBounds(491, 338, 89, 23);
+		contentPane.add(editButton);
+		
+		JLabel WarningLabel = new JLabel("");
+		WarningLabel.setForeground(Color.RED);
+		WarningLabel.setBounds(31, 181, 507, 14);
+		contentPane.add(WarningLabel);
+		
+		
+		
+		findButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (tcNoTextField.getText().equals(""))
+				{
+					WarningLabel.setText("Silinecek kiþinin TC Kimlik Numarasýný giriniz!");
+						
+				}else {
+					//TODO sorgu boþ dönerse kontrolü
+					WarningLabel.setText("");
+					
+					String tc =  tcNoTextField.getText();
+					
+				userRsc=new ControlGui().queryForTC(Long.parseLong(tc));
+				
+				lbl.setText( userRsc
+						.getProperty(FOAF.name).getObject()
+						.asLiteral().getString()  );
+				lbl2.setText( userRsc
+						.getProperty(FOAF.family_name).getObject()
+						.asLiteral().getString()  );
+				lbl3.setText( userRsc
+						.getProperty(
+								ResourceFactory
+										.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+												+ "password")).getObject()
+						.asLiteral().getString() );
+				lbl4.setText( userRsc
+						.getProperty(
+								ResourceFactory
+										.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+												+ "email")).getObject()
+						.asLiteral().getString() );
+				
+				}
+			}
+		});
+		
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				//TODO düzenleme iþlemi
+				
+				
+				
+				
+			}
+		});
+		
+		
+		
+		
+		
 	}
 }

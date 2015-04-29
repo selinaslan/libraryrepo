@@ -40,7 +40,7 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 import description.ControlGui;
-import description.KutuphaneStore;
+import description.LibraryStore;
 import description.OntologyConstants;
 
 import javax.swing.border.MatteBorder;
@@ -49,7 +49,7 @@ import javax.swing.AbstractListModel;
 
 import java.awt.event.MouseEvent;
 
-public class Kullanýcý extends JFrame {
+public class User extends JFrame {
 
 	/**
 	 * 
@@ -63,8 +63,8 @@ public class Kullanýcý extends JFrame {
 		return id;
 	}
 
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField nameTextField;
+	private JTextField familyNameTextField;
 
 	/**
 	 * Launch the application.
@@ -73,7 +73,7 @@ public class Kullanýcý extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Kullanýcý frame = new Kullanýcý(id);
+					User frame = new User(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -87,8 +87,8 @@ public class Kullanýcý extends JFrame {
 	 * 
 	 * @param id2
 	 */
-	public Kullanýcý(long id2) {
-		Kullanýcý.id=id2;
+	public User(long id2) {
+		User.id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 800, 600);
 		contentPane = new JPanel();
@@ -111,33 +111,55 @@ public class Kullanýcý extends JFrame {
 		menuBar.setBounds(0, 44, 590, 21);
 		contentPane.add(menuBar);
 
-		JMenu mnNewMenu = new JMenu("Kullan\u0131c\u0131");
-		menuBar.add(mnNewMenu);
+		JMenu userItem = new JMenu("Kullan\u0131c\u0131");
+		menuBar.add(userItem);
 
 		JMenu mnNewMenu_1 = new JMenu("Kullan\u0131c\u0131 Bilgileri");
-		mnNewMenu.add(mnNewMenu_1);
+		userItem.add(mnNewMenu_1);
 
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("G\u00F6r\u00FCnt\u00FCle");
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("G\u00F6r\u00FCnt\u00FCle/D\u00FCzenle");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//setVisible(false);
+				ShowInfo showi = new ShowInfo(id);
+				showi.setVisible(true);
+				
+				
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_5);
 
-		JMenuItem mntmNewMenuItem_6 = new JMenuItem("D\u00FCzenle");
-		mnNewMenu_1.add(mntmNewMenuItem_6);
-
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Al\u0131nan Kitaplar");
-		mnNewMenu.add(mntmNewMenuItem_4);
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ReadBook rb = new ReadBook(id);
+				rb.setVisible(true);
+				
+			}
+		});
+		userItem.add(mntmNewMenuItem_4);
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("\u00C7\u0131k\u0131\u015F");
-		mnNewMenu.add(mntmNewMenuItem);
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				AnaPencere ana = new AnaPencere();
+				ana.main(null);
+				
+			}
+		});
+		userItem.add(mntmNewMenuItem);
 		
-				JMenu mnNewMenu_2 = new JMenu("\u0130\u015Flemler");
-				menuBar.add(mnNewMenu_2);
+				JMenu processItem = new JMenu("\u0130\u015Flemler");
+				menuBar.add(processItem);
 				
 						JMenuItem mntmNewMenuItem_1 = new JMenuItem("Kitap Ara");
 						mntmNewMenuItem_1.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
 
 								setVisible(false);
-								KitapAra kitapAra = new KitapAra(3);
+								FindBook kitapAra = new FindBook(id);
 								kitapAra.setVisible(true);
 
 							}
@@ -145,41 +167,41 @@ public class Kullanýcý extends JFrame {
 						mntmNewMenuItem_1.addMouseListener(new MouseAdapter() {
 
 						});
-						mnNewMenu_2.add(mntmNewMenuItem_1);
+						processItem.add(mntmNewMenuItem_1);
 						
 								JMenuItem mntmNewMenuItem_2 = new JMenuItem("Yazar Ara");
 								mntmNewMenuItem_2.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 
 										setVisible(false);
-										KitapAra kitapAra = new KitapAra(3);
+										FindBook kitapAra = new FindBook(3);
 										kitapAra.setVisible(true);
 
 									}
 								});
-								mnNewMenu_2.add(mntmNewMenuItem_2);
+								processItem.add(mntmNewMenuItem_2);
 								
 										JMenuItem mntmNewMenuItem_3 = new JMenuItem("Yay\u0131nevi Ara");
 										mntmNewMenuItem_3.addActionListener(new ActionListener() {
 											public void actionPerformed(ActionEvent e) {
 
 												setVisible(false);
-												KitapAra kitapAra = new KitapAra(3);
+												FindBook kitapAra = new FindBook(3);
 												kitapAra.setVisible(true);
 
 											}
 										});
-										mnNewMenu_2.add(mntmNewMenuItem_3);
+										processItem.add(mntmNewMenuItem_3);
 
-		textField = new JTextField();
-		textField.setBounds(629, 103, 145, 23);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		nameTextField = new JTextField();
+		nameTextField.setBounds(629, 103, 145, 23);
+		contentPane.add(nameTextField);
+		nameTextField.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(629, 137, 145, 23);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		familyNameTextField = new JTextField();
+		familyNameTextField.setBounds(629, 137, 145, 23);
+		contentPane.add(familyNameTextField);
+		familyNameTextField.setColumns(10);
 		// friend ekleme için
 		
 		JList namelist = new JList();
@@ -201,12 +223,12 @@ public class Kullanýcý extends JFrame {
 		
 		//Resource friend = null;
 
-		JButton btnAra = new JButton("Ara"); 
-		btnAra.addActionListener(new ActionListener() {  // Adý ve Soyadý textfield lardan alýr eve aramak çin ilgili methota yollar.
+		JButton searchButton = new JButton("Ara"); 
+		searchButton.addActionListener(new ActionListener() {  // Adý ve Soyadý textfield lardan alýr eve aramak çin ilgili methota yollar.
 			public void actionPerformed(ActionEvent arg0) {
 
-				String name = textField.getText();
-				String surname = textField_1.getText();
+				String name = nameTextField.getText();
+				String surname = familyNameTextField.getText();
 				Vector<Resource> users = new ControlGui().queryForFriends(name,
 						surname);
 				
@@ -254,30 +276,30 @@ public class Kullanýcý extends JFrame {
 			
 		});
   
-		btnAra.setBounds(685, 171, 89, 23);
-		contentPane.add(btnAra);
+		searchButton.setBounds(685, 171, 89, 23);
+		contentPane.add(searchButton);
 
-		JButton btnEkle = new JButton("Ekle");
-		btnEkle.addActionListener(new ActionListener() {
+		JButton addButton = new JButton("Ekle");
+		addButton.addActionListener(new ActionListener() {
 		//TODO: kiþi ekle fonksiyonu yok	
 			public void actionPerformed(ActionEvent arg0) { // Seçilen kiþi arkadaþ olarak eklenir
 				
 				
+			//TODO fonksiyon haline getir	
 				
-				
-				KutuphaneStore
-						.getInstance()
+				LibraryStore
+				.getInstance()
 						.addStatement(
 								ResourceFactory
 										.createResource(OntologyConstants.RESOURCE_BASE_URI
-												+ Kullanýcý.id), FOAF.knows,
+												+ User.id), FOAF.knows,
 								friendList.get(index));
 				
 				JOptionPane.showMessageDialog(null,
 						"Arkadaþýnýz takibe alýnmýþtýr.");
 				
-				textField.setText("");
-				textField_1.setText("");
+				nameTextField.setText("");
+				familyNameTextField.setText("");
 				//TODO: listeyi sil
 		        				
 			}
@@ -286,11 +308,13 @@ public class Kullanýcý extends JFrame {
 			
 			
 		});
-		btnEkle.setBounds(685, 339, 89, 23);
-		contentPane.add(btnEkle);
+		addButton.setBounds(685, 339, 89, 23);
+		contentPane.add(addButton);
 		
 		
-		
+		/*setVisible(false);
+		ShowInf admn = new ShowInf(id);
+		admn.setVisible(true);*/
 		
 		
 		

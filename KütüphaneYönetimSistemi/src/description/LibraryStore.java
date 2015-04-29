@@ -11,15 +11,16 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.tdb.TDBFactory;
 
-public class KutuphaneStore {
+public class LibraryStore {
 
 	private Dataset dataset;
 
-	private static KutuphaneStore instance;
+	private static LibraryStore instance;
 
-	public KutuphaneStore() {
+	public LibraryStore() {
 		super();
 		dataset = TDBFactory
 				.createDataset(DatasetConstants.LIBRARY_DATASET_NAME);
@@ -34,9 +35,9 @@ public class KutuphaneStore {
 		dataset.end();
 	}
 
-	public static KutuphaneStore getInstance() {
+	public static LibraryStore getInstance() {
 		if (instance == null) {
-			instance = new KutuphaneStore();
+			instance = new LibraryStore();
 		}
 		return instance;
 	}
@@ -63,4 +64,5 @@ public class KutuphaneStore {
 		dataset.commit();
 		dataset.end();
 	}
+
 }

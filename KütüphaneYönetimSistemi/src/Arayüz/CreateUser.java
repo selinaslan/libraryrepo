@@ -2,7 +2,7 @@ package Arayüz;
 
 import description.ControlGui;
 
-import description.KutuphaneStore;
+import description.LibraryStore;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -27,11 +27,11 @@ import java.awt.event.ActionEvent;
 public class CreateUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField tcTextField;
+	private JTextField nameTextField;
+	private JTextField familyNameTextField;
+	private JTextField passwordTextField;
+	private JTextField eMailTextField;
 	public static int id;
 
 	/**
@@ -54,6 +54,7 @@ public class CreateUser extends JFrame {
 	 * Create the frame.
 	 */
 	public CreateUser(int id2) {
+		id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 606, 428);
 		contentPane = new JPanel();
@@ -68,65 +69,65 @@ public class CreateUser extends JFrame {
 		HeaderLabel.setBounds(0, 0, 590, 42);
 		contentPane.add(HeaderLabel);
 
-		JLabel lblTcNo = new JLabel("TC No:");
-		lblTcNo.setBounds(20, 78, 46, 14);
-		contentPane.add(lblTcNo);
+		JLabel tcLabel = new JLabel("TC No:");
+		tcLabel.setBounds(20, 78, 46, 14);
+		contentPane.add(tcLabel);
 
-		JLabel lblAd = new JLabel("Ad:");
-		lblAd.setBounds(20, 115, 46, 14);
-		contentPane.add(lblAd);
+		JLabel nameLabel = new JLabel("Ad:");
+		nameLabel.setBounds(20, 115, 46, 14);
+		contentPane.add(nameLabel);
 
-		JLabel lblSoyad = new JLabel("Soyad:");
-		lblSoyad.setBounds(20, 151, 46, 14);
-		contentPane.add(lblSoyad);
+		JLabel familyNameLabel = new JLabel("Soyad:");
+		familyNameLabel.setBounds(20, 151, 46, 14);
+		contentPane.add(familyNameLabel);
 
-		JLabel lblifre = new JLabel("\u015Eifre:");
-		lblifre.setBounds(20, 191, 46, 14);
-		contentPane.add(lblifre);
+		JLabel PasswordLabel = new JLabel("\u015Eifre:");
+		PasswordLabel.setBounds(20, 191, 46, 14);
+		contentPane.add(PasswordLabel);
 
-		textField = new JTextField();
-		textField.setBounds(88, 75, 125, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tcTextField = new JTextField();
+		tcTextField.setBounds(88, 75, 125, 20);
+		contentPane.add(tcTextField);
+		tcTextField.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(88, 112, 125, 20);
-		contentPane.add(textField_1);
+		nameTextField = new JTextField();
+		nameTextField.setColumns(10);
+		nameTextField.setBounds(88, 112, 125, 20);
+		contentPane.add(nameTextField);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(88, 148, 125, 20);
-		contentPane.add(textField_2);
+		familyNameTextField = new JTextField();
+		familyNameTextField.setColumns(10);
+		familyNameTextField.setBounds(88, 148, 125, 20);
+		contentPane.add(familyNameTextField);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(88, 188, 125, 20);
-		contentPane.add(textField_3);
+		passwordTextField = new JTextField();
+		passwordTextField.setColumns(10);
+		passwordTextField.setBounds(88, 188, 125, 20);
+		contentPane.add(passwordTextField);
 
-		JLabel lblEmail = new JLabel("E-Mail");
-		lblEmail.setBounds(20, 238, 46, 14);
-		contentPane.add(lblEmail);
+		JLabel eMailLabel = new JLabel("E-Mail");
+		eMailLabel.setBounds(20, 238, 46, 14);
+		contentPane.add(eMailLabel);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(88, 235, 125, 20);
-		contentPane.add(textField_4);
+		eMailTextField = new JTextField();
+		eMailTextField.setColumns(10);
+		eMailTextField.setBounds(88, 235, 125, 20);
+		contentPane.add(eMailTextField);
 
-		JButton btnyeEkle = new JButton("\u00DCYE EKLE");
-		btnyeEkle.addActionListener(new ActionListener() {
+		JButton addMemberButton = new JButton("\u00DCYE EKLE");
+		addMemberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				ControlGui control = new ControlGui();
 
-				long tc = Long.parseLong(textField.getText());
+				long tc = Long.parseLong(tcTextField.getText());
 
-				Model uyeModel = control.CreateMember(textField_1.getText(),
-						textField_2.getText(), tc, textField_3.getText(),
-						textField_4.getText());
+				Model uyeModel = control.CreateMember(nameTextField.getText(),
+						familyNameTextField.getText(), tc, passwordTextField.getText(),
+						eMailTextField.getText());
 
 				if (uyeModel != null) {
-					KutuphaneStore.getInstance().addResourceModel(uyeModel);
+					LibraryStore.getInstance().addResourceModel(uyeModel);
 					// TODO:
 					JOptionPane.showMessageDialog(null,
 							"Üye baþarýyla eklenmiþtir.");
@@ -139,8 +140,8 @@ public class CreateUser extends JFrame {
 
 			}
 		});
-		btnyeEkle.setBounds(440, 317, 89, 23);
-		contentPane.add(btnyeEkle);
+		addMemberButton.setBounds(440, 317, 89, 23);
+		contentPane.add(addMemberButton);
 
 	}
 }

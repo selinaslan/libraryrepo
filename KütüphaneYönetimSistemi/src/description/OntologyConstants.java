@@ -4,6 +4,8 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 public class OntologyConstants {
+	
+	//TODO kütüphaneleri library
 	public static final String ONTOLOGY_BASE_URI = "http://kutuphane.org/ontology#";
 	public static final String RESOURCE_BASE_URI = "http://kutuphane.org/resource#";
 	public static final String BOOK_URI = ONTOLOGY_BASE_URI + "Book";
@@ -45,9 +47,9 @@ public class OntologyConstants {
 	static final Property USERNAME_PROPERTY = ResourceFactory
 			.createProperty(USERNAME_PROPERTY_URI);
 	
-//	static final String FAMILYNAME_PROPERTY_URI = ONTOLOGY_BASE_URI + "familyName";
-//	static final Property FAMILYNAME_PROPERTY = ResourceFactory
-//			.createProperty(FAMILYNAME_PROPERTY_URI);
+	static final String FAMILYNAME_PROPERTY_URI = ONTOLOGY_BASE_URI + "familyName";
+	static final Property FAMILYNAME_PROPERTY = ResourceFactory
+			.createProperty(FAMILYNAME_PROPERTY_URI);
 	
 	static final String RENTER_ROPERTY_URI = ONTOLOGY_BASE_URI + "renter";
 	static final Property RENTER_PROPERTY = ResourceFactory
