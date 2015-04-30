@@ -113,7 +113,7 @@ public class Admin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				setVisible(false);
-				  EditUser eu = new EditUser();
+				  EditUser eu = new EditUser(id);
 				  eu.setVisible(true);
 				
 			}
@@ -125,7 +125,7 @@ public class Admin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 			  setVisible(false);
-			  DeleteBook du = new DeleteBook(id);
+			  DeleteUser du = new DeleteUser(id);
 			  du.setVisible(true);
 				
 			}

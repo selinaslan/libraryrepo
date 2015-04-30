@@ -9,7 +9,6 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.RDF;
 
@@ -66,9 +65,7 @@ public class IndividualCreator {
 		bookRsc.addLiteral(OntologyConstants.EDITION_PROPERTY, edition);
 		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY, publicationDate);
 		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, author);
-		Property bookCountPrp = ResourceFactory
-				.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
-						+ "bookCount");
+		Property bookCountPrp = OntologyConstants.BOOK_COUNT_PRP;
 				bookRsc.addLiteral(bookCountPrp, bookCount);
 				
 		//bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);

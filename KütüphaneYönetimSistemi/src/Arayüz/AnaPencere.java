@@ -32,6 +32,7 @@ public class AnaPencere {
 	private JFrame frame;
 	private JTextField userNameTextField;
 	private JPasswordField passwordField;
+	
 
 	/**
 	 * Launch the application.

@@ -47,6 +47,8 @@ import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import description.ControlGui;
 import description.LibraryStore;
 import description.OntologyConstants;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class FindBook extends JFrame {
 
@@ -80,6 +82,15 @@ public class FindBook extends JFrame {
 	
 	
 	public FindBook(long id2) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				User usr = new User(id);
+				usr.setVisible(true);
+			}
+		});
 		id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 606, 428);

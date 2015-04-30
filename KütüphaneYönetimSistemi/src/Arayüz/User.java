@@ -48,6 +48,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.AbstractListModel;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class User extends JFrame {
 
@@ -88,6 +90,16 @@ public class User extends JFrame {
 	 * @param id2
 	 */
 	public User(long id2) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				AnaPencere ap = new AnaPencere();
+				ap.main(null);
+				
+			}
+		});
 		User.id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 800, 600);

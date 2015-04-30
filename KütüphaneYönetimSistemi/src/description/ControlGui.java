@@ -150,7 +150,10 @@ public  DefaultListModel ListeDoldur(List<Resource> friendList){
 				+ "PREFIX library:<"
 				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
 				+ "SELECT * WHERE {"  
-				+ "?s library:title \"" + title+ "\"^^xsd:string." 	
+				+ "?s library:title ?title."
+				+ "FILTER contains(lcase(?title),lcase(\""+title+"\"^^xsd:string))"
+//				+ "FILTER regex(?title,\"^"+title+"\"^^xsd:string,\"i\" )"
+//				+ "?s library:title \"" + title+ "\"^^xsd:string." 	
 				+"}";
 
 		
@@ -207,7 +210,7 @@ public  DefaultListModel ListeDoldur(List<Resource> friendList){
 				+ "PREFIX library:<"
 				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
 				+ "SELECT * WHERE {"  
-				+ "?s library:publisher  \"" + publisher+ "\"^^xsd:string." 
+				+ " ?s library:publisher  \"" + publisher+ "\"^^xsd:string.   " 
 				
 			
 				+"}";

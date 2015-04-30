@@ -23,13 +23,18 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 import description.ControlGui;
+import description.LibraryStore;
 import description.OntologyConstants;
+
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class DeleteUser extends JFrame {
 
 	private JPanel contentPane;
-
+    private static Resource userRsc=null;
+    private static long id;
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +42,7 @@ public class DeleteUser extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DeleteUser frame = new DeleteUser();
+					DeleteUser frame = new DeleteUser(id);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +54,19 @@ public class DeleteUser extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeleteUser() {
+	public DeleteUser(long id2) {
+		
+		id=id2;
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				Admin admn= new Admin(id);
+				admn.setVisible(true);
+				
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 606, 428);
 		contentPane = new JPanel();
@@ -99,31 +116,6 @@ public class DeleteUser extends JFrame {
 		contentPane.add(WarningLabel);
 		JButton deleteButton = new JButton("Sil");
 		deleteButton.setForeground(Color.BLACK);
-		deleteButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if (personTextArea.getText().equals(""))
-				{
-					WarningLabel.setText("Silinecek kiþinin TC Kimlik Numarasýný giriniz!");
-					
-					
-				}else{
-					WarningLabel.setText("");
-					//TODO kiþi silme
-					
-					
-				}
-				
-				
-				
-			}
-		});
-		deleteButton.setBounds(396, 275, 89, 23);
-		contentPane.add(deleteButton);
-		
-		
-		
-		
 		
 		findButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,7 +123,7 @@ public class DeleteUser extends JFrame {
 				if (!personTextArea.getText().equals(""))
 				{	
 					WarningLabel.setText("");
-				Resource userRsc=null;
+				
 				String tc =  personTextArea.getText();
 				
 			userRsc=new ControlGui().queryForTC(Long.parseLong(tc));
@@ -153,6 +145,38 @@ public class DeleteUser extends JFrame {
 				
 			}
 		});
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (personTextArea.getText().equals(""))
+				{
+					WarningLabel.setText("Silinecek kiþinin TC Kimlik Numarasýný giriniz!");
+					
+					
+				}else{
+					WarningLabel.setText("");
+					
+					
+					
+					LibraryStore.getInstance().deleteResource(userRsc);
+					
+					JOptionPane.showMessageDialog(null, "silindi!");
+					
+					
+				}
+				
+				
+				
+			}
+		});
+		deleteButton.setBounds(396, 275, 89, 23);
+		contentPane.add(deleteButton);
+		
+		
+		
+		
+		
+		
 		
 		
 	}
