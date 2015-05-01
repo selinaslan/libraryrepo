@@ -7,7 +7,9 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -17,10 +19,14 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 import description.ControlGui;
+import description.LibraryStore;
 import description.OntologyConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ShowInfo extends JFrame {
 
@@ -31,7 +37,7 @@ public class ShowInfo extends JFrame {
 	private JTextField fNameTextField;
 	private JTextField eMAilTextField;
 	private JTextField passwordTextField;
-    
+	public static Resource userRsc = null;
 	public long getId() {
 		return id;
 	}
@@ -53,10 +59,7 @@ public class ShowInfo extends JFrame {
 				}
 			}
 
-			private void showinf() {
-				
-				
-			}
+			
 		});
 	}
 
@@ -64,6 +67,16 @@ public class ShowInfo extends JFrame {
 	 * Create the frame.
 	 */
 	public ShowInfo(long id2) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				Admin admn = new Admin(id);
+				admn.setVisible(true);
+				
+			}
+		});
 		
 		id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -196,7 +209,7 @@ public class ShowInfo extends JFrame {
 		//btnNewButton.addActionListener(new ActionListener() {
 		//	public void actionPerformed(ActionEvent arg0) {
 				
-		 if(id!=0) {       Resource userRsc=null;
+		 if(id!=0) {     
 				
 				
 			    userRsc=new ControlGui().queryForTC(id);
@@ -227,20 +240,10 @@ public class ShowInfo extends JFrame {
 			   
 			    btnDzenle.setBounds(23, 290, 89, 23);
 			    contentPane.add(btnDzenle);
-			    
-			    JLabel warningLabel = new JLabel("");
-			    warningLabel.setForeground(Color.RED);
-			    warningLabel.setBounds(23, 336, 288, 14);
-			    contentPane.add(warningLabel);
-			    
-			    JLabel warning2Label = new JLabel("");
-			    warning2Label.setForeground(Color.MAGENTA);
-			    warning2Label.setBounds(23, 365, 260, 14);
-			    contentPane.add(warning2Label);
 				
 			    btnDzenle.addActionListener(new ActionListener() {
 			    	public void actionPerformed(ActionEvent e) {
-			    		warningLabel.setText("Lütfen bütün boþuklarý doldurunuz!");
+			    		
 			    		
 			    		panel.setVisible(true);
 			    		
@@ -253,16 +256,26 @@ public class ShowInfo extends JFrame {
 				editButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						if (tcTextField.getText().equals(null) && nameTextField.getText().equals(null) && fNameTextField.getText().equals(null)
-								&&  eMAilTextField.getText().equals(null) && passwordTextField.getText().equals(null) ){
-							
-							
-							
-							
-						}else {warning2Label.setText("Bütün alanlarý doldurmadýnýz!");}
 						
+							
+							String tc = tcTextField.getText();
+							String name = nameTextField.getText();
+							String familyName = fNameTextField.getText();
+							String email = eMAilTextField.getText();
+							String password = passwordTextField.getText();
+							//TODO textfieldlarý yenile
+							
+							LibraryStore.getInstance().updatePropertyValue(ShowInfo.userRsc, FOAF.name, name);
+							
+							LibraryStore.getInstance().updatePropertyValue(
+									ShowInfoAdmin.userRsc, FOAF.family_name, familyName);
+							LibraryStore.getInstance().updatePropertyValue(
+									ShowInfoAdmin.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
+							LibraryStore.getInstance().updatePropertyValue(
+									ShowInfoAdmin.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
+
 						
-						
+							JOptionPane.showMessageDialog(null, "Kiþi Bilgileri Düzenlendi.");
 						
 						
 						

@@ -7,6 +7,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -218,6 +219,9 @@ public class EditUser extends JFrame {
 						EditUser.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
 				LibraryStore.getInstance().updatePropertyValue(
 						EditUser.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
+				
+				
+				JOptionPane.showMessageDialog(null, "Kiþi Bilgileri Düzenlendi.");
 
 			}
 		});

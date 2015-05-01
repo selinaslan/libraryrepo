@@ -74,7 +74,7 @@ public class Admin extends JFrame {
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//setVisible(false);
-				ShowInfo showi = new ShowInfo(id);
+				ShowInfoAdmin showi = new ShowInfoAdmin(id);
 				showi.setVisible(true);
 				
 			}

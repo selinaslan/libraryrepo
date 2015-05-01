@@ -31,6 +31,7 @@ public class Main {
 				 "?s foaf:name ?name." 
 				+ "?s library:tc  ?tcc."
 				+ "?s foaf:family_name ?soyad ."
+				+ "?s library:password ?pass ."
 				 + "}";
 				
 		
@@ -65,11 +66,11 @@ public class Main {
 			String name = querySolution.getLiteral("name").getString();
 			Long tcValue = querySolution.getLiteral("tcc").getLong();
 			String soyad = querySolution.getLiteral("soyad").getString();
-			//String password = querySolution.getLiteral("password").getString();
+			String password = querySolution.getLiteral("pass").getString();
 			//String email = querySolution.getLiteral("mail").getString();
 			//String friendName = querySolution.getLiteral("friendName").getString();
 			//System.out.println(name + "    " + soyad+"    " +" sifre:"+ password + " email  :  "+ email+" friend name: "+friendName) ;
-			System.out.println("     ad:"+ name  +" soyad:  "+ soyad +"  tcValue :  " + tcValue);
+			System.out.println("     ad:"+ name  +" soyad:  "+ soyad +"  tcValue :  " + tcValue + " þifre   : "+ password);
 		}
 			
 	

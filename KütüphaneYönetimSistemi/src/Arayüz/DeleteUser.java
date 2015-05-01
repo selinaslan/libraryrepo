@@ -160,7 +160,7 @@ public class DeleteUser extends JFrame {
 					
 					LibraryStore.getInstance().deleteResource(userRsc);
 					
-					JOptionPane.showMessageDialog(null, "silindi!");
+					JOptionPane.showMessageDialog(null, "Üye Silindi!");
 					
 					
 				}
