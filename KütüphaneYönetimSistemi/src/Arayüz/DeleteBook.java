@@ -23,7 +23,9 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 
 import description.ControlGui;
+import description.LibraryStore;
 import description.OntologyConstants;
+
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -32,6 +34,7 @@ public class DeleteBook extends JFrame {
 
 	private JPanel contentPane;
     public static long id;
+    static  Resource bookRsc=null;
 	/**
 	 * Launch the application.
 	 */
@@ -122,7 +125,9 @@ public class DeleteBook extends JFrame {
 					
 				}else{
 					WarningLabel.setText("");
-					//TODO kitap silme
+                   LibraryStore.getInstance().deleteResource(bookRsc);
+					
+					JOptionPane.showMessageDialog(null, "Kitap Silindi!");
 					
 					
 				}
@@ -153,7 +158,7 @@ public class DeleteBook extends JFrame {
 				if (!isbnTextArea.getText().equals(""))
 				{	
 					WarningLabel.setText("");
-				Resource bookRsc=null;
+				
 				String isbn =  isbnTextArea.getText();
 				
 			bookRsc=new ControlGui().queryForISBN(Integer.parseInt(isbn));
