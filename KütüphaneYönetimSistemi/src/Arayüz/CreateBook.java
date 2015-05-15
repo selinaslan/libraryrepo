@@ -34,6 +34,8 @@ import description.ControlGui;
 import description.LibraryStore;
 
 import javax.swing.JList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CreateBook extends JFrame {
 
@@ -49,6 +51,7 @@ public class CreateBook extends JFrame {
 	private JTextField pdateTextField;
 	private JTextField countTextField;
 	public static long id;
+	int index =0;
 	List<Resource> bookList = new ArrayList<Resource>();
 
 	/**
@@ -218,6 +221,15 @@ public class CreateBook extends JFrame {
 		addBookPanel.add(btnek);
 
 		JList list = new JList();
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				index =list.locationToIndex(arg0.getPoint());
+				
+				
+			}
+		});
 		list.setBounds(349, 23, 177, 165);
 		addBookPanel.add(list);
 
@@ -238,7 +250,7 @@ public class CreateBook extends JFrame {
 						+ "?book <http://dbpedia.org/property/pubDate> ?pubDate."
 						// + "FILTER contains(lcase(?name),lcase(\"" + title
 						// + "\"^^<http://www.w3.org/2001/XMLSchema#string>))"
-						+ "} LIMIT 1";
+						+ "} LIMIT 3";
 				Query query = QueryFactory.create(getBookQuery);
 				System.out.println(query);
 				ResultSet resultSet = QueryExecutionFactory.sparqlService(
@@ -262,6 +274,8 @@ public class CreateBook extends JFrame {
 					pdateTextField.setText(dateStr);
 				}
 
+			//TODO	list.setModel(new ControlGui().kitapListeDoldur(bookList));
+				
 				// friend eklemek için düzeltilecek
 
 			}

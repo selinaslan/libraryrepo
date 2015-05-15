@@ -100,6 +100,28 @@ public class ControlGui {
 		}
 		return userList;
 	}
+	
+	public Vector<Resource> queryForAllFriends(Long tc) {
+		Vector<Resource> userList = new Vector<Resource>();
+		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "
+				+ "PREFIX foaf:<" + FOAF.getURI() + "> " + "PREFIX library:<"
+				+ OntologyConstants.ONTOLOGY_BASE_URI + "> "
+				+ "SELECT * WHERE {" 
+				+ "?s library:tc \"" +tc+ "\"^^xsd:long. "
+				+"?s foaf:knows ?friend. "
+				+ "?friend foaf:name ?friendName ."
+				+ "?friend foaf:family_name ?friendFamilyName ."
+				 + "}";
+		ResultSet resultSet = LibraryStore.getInstance().queryModelAsSelect(sparqlTxt);
+		while (resultSet.hasNext()) {
+			QuerySolution querySolution = (QuerySolution) resultSet.next();
+			Resource resource = querySolution.getResource("s");
+			userList.add(resource);
+			String friend = querySolution.getLiteral("friendName").getString();
+			System.out.println("arkadaþ::"+friend);
+		}
+		return userList;
+	}
 
 	
 	public  DefaultListModel BookListFill(List<Resource> bookList){
@@ -112,6 +134,24 @@ public class ControlGui {
 						ResourceFactory
 						.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
 								+ "title")).getObject().asLiteral().getString() );	
+			 
+			 
+		 }
+		
+		
+		return listModel;
+	}
+	
+public  DefaultListModel allFriendsListFill(List<Resource> friendsList){
+		
+		DefaultListModel listModel = new DefaultListModel<Resource>();
+		
+		 for(int i =0;i<friendsList.size();i++)
+		 {
+			 listModel.addElement( friendsList.get(i).getProperty(
+						ResourceFactory
+						.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+								+ "friendName")).getObject().asLiteral().getString() );	
 			 
 			 
 		 }
@@ -144,6 +184,23 @@ public  DefaultListModel ListeDoldur(List<Resource> friendList){
 		return listModel;
 	}
 	
+
+public  DefaultListModel kitapListeDoldur(List<Resource> bookList){
+	
+	DefaultListModel listModel = new DefaultListModel<Resource>();
+	
+	 for(int i =0;i<bookList.size();i++)
+	 {
+		 listModel.addElement(  ((QuerySolution) bookList.get(i)).getLiteral("pubDate")
+					.getString() );	
+		 
+		 
+	 }
+	
+	
+	return listModel;
+}
+
 	public Vector<Resource> searchBookbyName(String title){
 		Vector<Resource> bookList = new Vector<Resource>();
 		String sparqlTxt = "PREFIX xsd:<http://www.w3.org/2001/XMLSchema#> "

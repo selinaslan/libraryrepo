@@ -138,7 +138,7 @@ public class Admin extends JFrame {
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Kitap Ekle");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//setVisible(false);
+				setVisible(false);
 				CreateBook cb = new CreateBook(id);
 				cb.setVisible(true);
 				
@@ -148,6 +148,16 @@ public class Admin extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Kitap \u00C7\u0131kar");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				DeleteBook db = new DeleteBook(id);
+				db.setVisible(true);
+				
+				
+				
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
 	}

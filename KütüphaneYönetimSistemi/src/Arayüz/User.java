@@ -60,6 +60,7 @@ public class User extends JFrame {
 	private JPanel contentPane;
 	private static long id;
      List<Resource> friendList = new ArrayList<Resource>();
+     List<Resource> allFriendList = new ArrayList<Resource>();
      int index=0;
 	public long getId() {
 		return id;
@@ -112,7 +113,7 @@ public class User extends JFrame {
 		Image img = new ImageIcon(this.getClass().getResource("/Header.jpg"))
 				.getImage();
 		HeaderLabel.setIcon(new ImageIcon(img));
-		HeaderLabel.setBounds(0, 0, 590, 42);
+		HeaderLabel.setBounds(0, 0, 784, 42);
 		contentPane.add(HeaderLabel);
 
 		JLabel KullaniciAdiLabel = new JLabel("Ho\u015Fgeldiniz say\u0131n....");
@@ -323,13 +324,80 @@ public class User extends JFrame {
 		addButton.setBounds(685, 339, 89, 23);
 		contentPane.add(addButton);
 		
+		JLabel lblKullancAd = new JLabel("Ad\u0131:");
+		lblKullancAd.setBounds(571, 107, 36, 14);
+		contentPane.add(lblKullancAd);
+		
+		JLabel lblSoyad = new JLabel("Soyad\u0131:");
+		lblSoyad.setBounds(573, 141, 46, 14);
+		contentPane.add(lblSoyad);
+		
+		JList list = new JList();
+		list.setBounds(10, 193, 152, 217);
+		contentPane.add(list);
+		
+		JLabel lblArkadaListesi = new JLabel("Arkada\u015F Listesi");
+		lblArkadaListesi.setBounds(10, 175, 152, 14);
+		contentPane.add(lblArkadaListesi);
+		
+		JButton btnNewButton = new JButton("");
+		
+		
+		btnNewButton.setBounds(126, 424, 25, 23);
+		Image imgbutton = new ImageIcon(this.getClass().getResource("/refresh.jpg"))
+		.getImage();
+		btnNewButton.setIcon(new ImageIcon(imgbutton));
+		
+		contentPane.add(btnNewButton);
+		
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Vector<Resource> allFriends = new ControlGui().queryForAllFriends(id);
+				
+				
+				
+					Resource friendsRsc=null;
+					for (int i = 0; i < allFriends.size(); i++) {
+						friendsRsc = allFriends.get(i);
+						// friend eklemek için düzeltilecek
+						allFriendList.add(friendsRsc);
+						
+					}
+						
+						
+						namelist.setModel(new ControlGui().allFriendsListFill(allFriendList));
+
+			}
+		});
+		
 		
 		/*setVisible(false);
 		ShowInf admn = new ShowInf(id);
 		admn.setVisible(true);*/
 		
 		
-		
+		/*btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Vector<Resource> allFriends = new ControlGui().queryForAllFriends(id);
+				
+				
+			//	 list = new JList<Resource>(users);
+				Resource friendsRsc=null;
+				for (int i = 0; i < allFriends.size(); i++) {
+					friendsRsc = allFriends.get(i);
+					// friend eklemek için düzeltilecek
+					
+					
+					
+					friendList.add(friendsRsc);
+				
+				
+			}
+		});*/
 		
 	
 		
