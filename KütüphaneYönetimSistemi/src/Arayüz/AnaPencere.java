@@ -67,9 +67,6 @@ public class AnaPencere {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel HeaderLabel = new JLabel("");
-		HeaderLabel.addMouseListener(new MouseAdapter() {
-			
-		});
 		Image img= new ImageIcon(this.getClass().getResource("/Header.jpg")).getImage();
 		HeaderLabel.setIcon(new ImageIcon(img));
 		HeaderLabel.setBounds(0, 0, 590, 68);
@@ -133,6 +130,17 @@ public class AnaPencere {
 		});
 		adminLabel.setBounds(518, 68, 72, 14);
 		frame.getContentPane().add(adminLabel);
+		
+		JLabel piclabel = new JLabel("");
+		piclabel.setBounds(26, 89, 306, 273);
+		Image img2= new ImageIcon(this.getClass().getResource("/anasayfa.png")).getImage();
+		
+		piclabel.setIcon(new ImageIcon(img2));
+		
+		frame.getContentPane().add(piclabel);
+		
+		
+		
 		
 		
 	}

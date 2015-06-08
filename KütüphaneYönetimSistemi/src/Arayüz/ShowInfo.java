@@ -258,21 +258,20 @@ public class ShowInfo extends JFrame {
 						
 						
 							
-							String tc = tcTextField.getText();
 							String name = nameTextField.getText();
 							String familyName = fNameTextField.getText();
 							String email = eMAilTextField.getText();
 							String password = passwordTextField.getText();
 							//TODO textfieldlarý yenile
 							
-							LibraryStore.getInstance().updatePropertyValue(ShowInfo.userRsc, FOAF.name, name);
+							LibraryStore.getInstance().updatePropertyStringValue(ShowInfo.userRsc, FOAF.name, name);
 							
-							LibraryStore.getInstance().updatePropertyValue(
-									ShowInfoAdmin.userRsc, FOAF.family_name, familyName);
-							LibraryStore.getInstance().updatePropertyValue(
-									ShowInfoAdmin.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
-							LibraryStore.getInstance().updatePropertyValue(
-									ShowInfoAdmin.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfo.userRsc, FOAF.family_name, familyName);
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfo.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfo.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
 
 						
 							JOptionPane.showMessageDialog(null, "Kiþi Bilgileri Düzenlendi.");

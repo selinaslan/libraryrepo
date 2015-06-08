@@ -101,7 +101,7 @@ public class AdminLogin extends JFrame {
 				
 				long l = Long.parseLong(userNameTextField.getText()); 
 				System.out.println("Parsed id: "+l);
-				boolean c = control.MemberLoginControl(l, passwordTextField.getText());
+				boolean c = control.AdminLoginControl(l, passwordTextField.getText());
 				
 				if(c==true){
 				setVisible(false);

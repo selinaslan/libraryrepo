@@ -32,13 +32,19 @@ import javax.swing.JComboBox;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
@@ -47,6 +53,7 @@ import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import description.ControlGui;
 import description.LibraryStore;
 import description.OntologyConstants;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -312,6 +319,21 @@ public class FindBook extends JFrame {
 										.createResource(OntologyConstants.RESOURCE_BASE_URI
 												+ FindBook.id), readPrp,
 								bookList.get(index));
+			/*	
+				ControlGui control = new ControlGui();
+				
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
+				Calendar c = Calendar.getInstance();
+				c.setTime(new Date()); // Now use today date.
+				dateFormat.format(c)
+			
+				Model rentalmodel = control.CreateRental(FindBook.id, bookList.get(index)
+						.getProperty(
+								ResourceFactory
+										.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+												+ "isbn")).getObject()
+						.asLiteral().getInt(), c, c.add(Calendar.DATE, 7));
+				*/
 				
 				JOptionPane.showMessageDialog(null,
 						"Kitap alýnmýþtýr.");

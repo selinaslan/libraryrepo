@@ -1,4 +1,5 @@
 package description;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -13,9 +14,26 @@ import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class IndividualCreator {
-	
-	
-	public static Model createMember(String name , String familyName , long tc , String password , String email) {
+
+	private static final String RENTAL_PATTERN = "/rental/";
+
+	public static Model createRental(long renterId, int isbn, Date rentDate,
+			Date dueDate) {
+		Model resourceModel = ModelFactory.createDefaultModel();
+		Resource rentalRsc = resourceModel
+				.createResource(OntologyConstants.RESOURCE_BASE_URI
+						+ RENTAL_PATTERN + renterId);
+		// uyeRsc.addProperty(RDF.type, FOAF.Person);
+		rentalRsc.addLiteral(OntologyConstants.ISBN_PROPERTY, isbn);
+		rentalRsc.addLiteral(OntologyConstants.RENTDATE_PROPERTY, rentDate);
+		rentalRsc.addLiteral(OntologyConstants.DUEDATE_PROPERTY, dueDate);
+		rentalRsc.addLiteral(OntologyConstants.TC_PROPERTY, new Long(renterId));
+
+		return resourceModel;
+	}
+
+	public static Model createMember(String name, String familyName, long tc,
+			String password, String email) {
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource uyeRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + tc);
@@ -29,8 +47,8 @@ public class IndividualCreator {
 		return resourceModel;
 	}
 
-	
-	public static Model createAdmin(String name , String familyName , long tc , String password , String email , String userName) {
+	public static Model createAdmin(String name, String familyName, long tc,
+			String password, String email, String userName) {
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource adminRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + tc);
@@ -44,40 +62,38 @@ public class IndividualCreator {
 		adminRsc.addProperty(RDF.type, OntologyConstants.ADMIN_RSC);
 		return resourceModel;
 	}
-	
-	
-	
 
-	public static Model createBook(String title, String publisher ,
+	public static Model createBook(String title, String publisher,
 			String format, int isbn, int price, int edition, String author,
-			String publicationDate,int bookCount)
-	
+			String publicationDate, int bookCount)
+
 	{
 		Model resourceModel = ModelFactory.createDefaultModel();
 		Resource bookRsc = resourceModel
 				.createResource(OntologyConstants.RESOURCE_BASE_URI + isbn);
-		
+
 		bookRsc.addLiteral(OntologyConstants.TITLE_PROPERTY, title);
 		bookRsc.addLiteral(OntologyConstants.PUBLISHER_PROPERTY, publisher);
 		bookRsc.addLiteral(OntologyConstants.FORMAT_PROPERTY, format);
 		bookRsc.addLiteral(OntologyConstants.ISBN_PROPERTY, isbn);
 		bookRsc.addLiteral(OntologyConstants.PRICE_PROPERTY, price);
 		bookRsc.addLiteral(OntologyConstants.EDITION_PROPERTY, edition);
-		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY, publicationDate);
+		bookRsc.addLiteral(OntologyConstants.PUBLICDATE_PROPERTY,
+				publicationDate);
 		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, author);
 		Property bookCountPrp = OntologyConstants.BOOK_COUNT_PRP;
-				bookRsc.addLiteral(bookCountPrp, bookCount);
-				
-		//bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);
-//TODO: yazar listesi ekleme	ve count ekleme
-				
-				
-//		for(int i =0;i<authorList.size();i++)
-//			
-//		{     	
-//		bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList.get(i));
-//		}	
-	
+		bookRsc.addLiteral(bookCountPrp, bookCount);
+
+		// bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY, authorList);
+		// TODO: yazar listesi ekleme ve count ekleme
+
+		// for(int i =0;i<authorList.size();i++)
+		//
+		// {
+		// bookRsc.addLiteral(OntologyConstants.AUTHOR_PROPERTY,
+		// authorList.get(i));
+		// }
+
 		return resourceModel;
 	}
 

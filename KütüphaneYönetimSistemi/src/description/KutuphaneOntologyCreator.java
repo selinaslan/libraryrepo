@@ -171,13 +171,13 @@ public class KutuphaneOntologyCreator {
 
 		// Rent Properties
 
-		ObjectProperty renterPrp = ontModel
-				.createObjectProperty(OntologyConstants.RENTER_ROPERTY_URI);
-		renterPrp.addDomain(rentalCls);
-		renterPrp.addRange(memberCls);
+//		ObjectProperty renterPrp = ontModel
+//				.createObjectProperty(OntologyConstants.RENTER_ROPERTY_URI);
+//		renterPrp.addDomain(rentalCls);
+//		renterPrp.addRange(memberCls);
 
 		titlePrp.addDomain(rentalCls);
-		
+		tcPrp.addDomain(rentalCls);
 //TODO		ObjectProperty rentBookNamePrp = ontModel
 //				.createObjectProperty(OntologyConstants.RENTBOOK_PROPERTY_URI);
 //		rentBookNamePrp.addDomain(rentalCls);

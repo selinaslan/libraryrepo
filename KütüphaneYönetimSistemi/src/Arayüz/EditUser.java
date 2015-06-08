@@ -205,21 +205,18 @@ public class EditUser extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
+				
 				String name = nameTextField.getText();
 				String familyName = familtNameTextField.getText();
 				String email = eMailTextField.getText();
 				String password = passwordTextField.getText();
 
 				// TODO: name yerine firstName
-				LibraryStore.getInstance().updatePropertyValue(EditUser.userRsc, FOAF.name, name);
-				LibraryStore.getInstance().updatePropertyValue(
-						EditUser.userRsc, FOAF.family_name, familyName);
-				LibraryStore.getInstance().updatePropertyValue(
-						EditUser.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
-				LibraryStore.getInstance().updatePropertyValue(
-						EditUser.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
-				
+				LibraryStore.getInstance().updatePropertyStringValue(EditUser.userRsc, FOAF.name, name);
+			
+				LibraryStore.getInstance().updatePropertyStringValue(EditUser.userRsc, FOAF.family_name, familyName);
+				LibraryStore.getInstance().updatePropertyStringValue(EditUser.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
+				LibraryStore.getInstance().updatePropertyStringValue(EditUser.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
 				
 				JOptionPane.showMessageDialog(null, "Kiþi Bilgileri Düzenlendi.");
 

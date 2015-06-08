@@ -103,7 +103,7 @@ public class User extends JFrame {
 		});
 		User.id=id2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 200, 800, 600);
+		setBounds(100, 100, 606, 428);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -113,7 +113,7 @@ public class User extends JFrame {
 		Image img = new ImageIcon(this.getClass().getResource("/Header.jpg"))
 				.getImage();
 		HeaderLabel.setIcon(new ImageIcon(img));
-		HeaderLabel.setBounds(0, 0, 784, 42);
+		HeaderLabel.setBounds(0, 0, 590, 42);
 		contentPane.add(HeaderLabel);
 
 		JLabel KullaniciAdiLabel = new JLabel("Ho\u015Fgeldiniz say\u0131n....");
@@ -207,12 +207,12 @@ public class User extends JFrame {
 										processItem.add(mntmNewMenuItem_3);
 
 		nameTextField = new JTextField();
-		nameTextField.setBounds(629, 103, 145, 23);
+		nameTextField.setBounds(435, 137, 145, 23);
 		contentPane.add(nameTextField);
 		nameTextField.setColumns(10);
 
 		familyNameTextField = new JTextField();
-		familyNameTextField.setBounds(629, 137, 145, 23);
+		familyNameTextField.setBounds(435, 171, 145, 23);
 		contentPane.add(familyNameTextField);
 		familyNameTextField.setColumns(10);
 		// friend ekleme için
@@ -228,7 +228,7 @@ public class User extends JFrame {
 				
 			}
 		});
-		namelist.setBounds(539, 221, 235, 77);
+		namelist.setBounds(345, 250, 235, 77);
 		contentPane.add(namelist);
 		
 		
@@ -289,7 +289,7 @@ public class User extends JFrame {
 			
 		});
   
-		searchButton.setBounds(685, 171, 89, 23);
+		searchButton.setBounds(478, 216, 89, 23);
 		contentPane.add(searchButton);
 
 		JButton addButton = new JButton("Ekle");
@@ -321,29 +321,29 @@ public class User extends JFrame {
 			
 			
 		});
-		addButton.setBounds(685, 339, 89, 23);
+		addButton.setBounds(478, 338, 89, 23);
 		contentPane.add(addButton);
 		
 		JLabel lblKullancAd = new JLabel("Ad\u0131:");
-		lblKullancAd.setBounds(571, 107, 36, 14);
+		lblKullancAd.setBounds(363, 141, 36, 14);
 		contentPane.add(lblKullancAd);
 		
 		JLabel lblSoyad = new JLabel("Soyad\u0131:");
-		lblSoyad.setBounds(573, 141, 46, 14);
+		lblSoyad.setBounds(363, 175, 46, 14);
 		contentPane.add(lblSoyad);
 		
 		JList list = new JList();
-		list.setBounds(10, 193, 152, 217);
+		list.setBounds(10, 162, 152, 217);
 		contentPane.add(list);
 		
 		JLabel lblArkadaListesi = new JLabel("Arkada\u015F Listesi");
-		lblArkadaListesi.setBounds(10, 175, 152, 14);
+		lblArkadaListesi.setBounds(10, 141, 152, 14);
 		contentPane.add(lblArkadaListesi);
 		
 		JButton btnNewButton = new JButton("");
 		
 		
-		btnNewButton.setBounds(126, 424, 25, 23);
+		btnNewButton.setBounds(172, 356, 25, 23);
 		Image imgbutton = new ImageIcon(this.getClass().getResource("/refresh.jpg"))
 		.getImage();
 		btnNewButton.setIcon(new ImageIcon(imgbutton));
@@ -368,7 +368,7 @@ public class User extends JFrame {
 					}
 						
 						
-						namelist.setModel(new ControlGui().allFriendsListFill(allFriendList));
+						list.setModel(new ControlGui().allFriendsListFill(allFriendList));
 
 			}
 		});
