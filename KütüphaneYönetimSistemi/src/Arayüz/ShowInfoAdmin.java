@@ -1,0 +1,252 @@
+package Arayüz;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+
+import description.ControlGui;
+import description.LibraryStore;
+import description.OntologyConstants;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class ShowInfoAdmin extends JFrame {
+
+	private JPanel contentPane;
+	private static long id;
+	private JTextField tcTextField;
+	private JTextField nameTextField;
+	private JTextField fNameTextField;
+	private JTextField eMAilTextField;
+	private JTextField passwordTextField;
+	public static Resource userRsc = null;
+	public long getId() {
+		return id;
+	}
+	public JPanel panel = new JPanel();
+	/**
+	 * Launch the application.
+	 */
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ShowInfoAdmin frame = new ShowInfoAdmin(id);
+					frame.setVisible(true);
+					
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ShowInfoAdmin(long id2) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				Admin admn = new Admin(id);
+				admn.setVisible(true);
+				
+			}
+		});
+		
+		id=id2;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 606, 428);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JLabel HeaderLabel = new JLabel("New label");
+		Image img= new ImageIcon(this.getClass().getResource("/Header.jpg")).getImage();
+		HeaderLabel.setIcon(new ImageIcon(img));
+		HeaderLabel.setBounds(0, 0, 590, 42);
+		contentPane.add(HeaderLabel);
+		
+		JLabel tcLbl = new JLabel("TC Kimlik No:");
+		tcLbl.setBounds(23, 97, 101, 14);
+		contentPane.add(tcLbl);
+		
+		JLabel nameLbl = new JLabel("Ad\u0131:");
+		nameLbl.setBounds(23, 130, 46, 14);
+		contentPane.add(nameLbl);
+		
+		JLabel fNameLbl = new JLabel("Soyad\u0131:");
+		fNameLbl.setBounds(23, 166, 57, 14);
+		contentPane.add(fNameLbl);
+		
+		JLabel eMailLbl = new JLabel("E-Posta:");
+		eMailLbl.setBounds(23, 204, 57, 14);
+		contentPane.add(eMailLbl);
+		
+		JLabel passwordLbl = new JLabel("\u015Eifre:");
+		passwordLbl.setBounds(23, 240, 46, 14);
+		contentPane.add(passwordLbl);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(321, 99, 259, 259);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		panel.setVisible(false);
+		
+		nameTextField = new JTextField();
+		nameTextField.setBounds(0, 30, 164, 20);
+		panel.add(nameTextField);
+		nameTextField.setColumns(10);
+		
+		fNameTextField = new JTextField();
+		fNameTextField.setBounds(0, 70, 164, 20);
+		panel.add(fNameTextField);
+		fNameTextField.setColumns(10);
+		
+		eMAilTextField = new JTextField();
+		eMAilTextField.setBounds(0, 103, 164, 20);
+		panel.add(eMAilTextField);
+		eMAilTextField.setColumns(10);
+		
+		passwordTextField = new JTextField();
+		passwordTextField.setBounds(0, 134, 164, 20);
+		panel.add(passwordTextField);
+		passwordTextField.setColumns(10);
+		
+		JButton editButton = new JButton("KAYDET");
+	
+		editButton.setBounds(160, 208, 89, 23);
+		panel.add(editButton);
+		
+		tcTextField = new JTextField();
+		tcTextField.setBounds(0, -1, 164, 20);
+		panel.add(tcTextField);
+		tcTextField.setColumns(10);
+		
+		JLabel tc2Lbl = new JLabel("");
+		tc2Lbl.setBounds(119, 97, 164, 14);
+		
+		contentPane.add(tc2Lbl);
+		
+		JLabel name2Lbl = new JLabel("");
+		name2Lbl.setBounds(119, 130, 164, 14);
+		contentPane.add(name2Lbl);
+		
+		JLabel fName2Lbl = new JLabel("");
+		fName2Lbl.setBounds(119, 166, 164, 14);
+		contentPane.add(fName2Lbl);
+		
+		JLabel eMail2Lbl = new JLabel("");
+		eMail2Lbl.setBounds(119, 204, 164, 14);
+		contentPane.add(eMail2Lbl);
+		
+		JLabel password2Lbl = new JLabel("");
+		password2Lbl.setBounds(119, 240, 164, 14);
+		contentPane.add(password2Lbl);
+		
+		
+		
+		
+		
+	
+		 if(id!=0) {     
+				
+				
+			    userRsc=new ControlGui().queryForTC(id);
+		        
+			    tc2Lbl.setText( Long.toString(id));
+			    name2Lbl.setText( userRsc
+						.getProperty(FOAF.name).getObject()
+						.asLiteral().getString()  );
+				
+			    fName2Lbl.setText( userRsc
+						.getProperty(FOAF.family_name).getObject()
+						.asLiteral().getString()  );
+			    
+			    eMail2Lbl.setText( userRsc
+						.getProperty(
+								ResourceFactory
+										.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+												+ "email")).getObject()
+						.asLiteral().getString() );
+			    password2Lbl.setText( userRsc
+						.getProperty(
+								ResourceFactory
+										.createProperty(OntologyConstants.ONTOLOGY_BASE_URI
+												+ "password")).getObject()
+						.asLiteral().getString() ); }
+			    
+			    JButton btnDzenle = new JButton("D\u00FCzenle");
+			   
+			    btnDzenle.setBounds(23, 290, 89, 23);
+			    contentPane.add(btnDzenle);
+				
+			    btnDzenle.addActionListener(new ActionListener() {
+			    	public void actionPerformed(ActionEvent e) {
+			    		
+			    		panel.setVisible(true);
+			    		
+			    	}
+			    });
+				
+		//	}
+		//});
+			    
+				editButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						
+							
+							String tc = tcTextField.getText();
+							String name = nameTextField.getText();
+							String familyName = fNameTextField.getText();
+							String email = eMAilTextField.getText();
+							String password = passwordTextField.getText();
+							//TODO textfieldlarý yenile
+							LibraryStore.getInstance().updatePropertyStringValue(ShowInfoAdmin.userRsc, FOAF.name, name);
+							
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfoAdmin.userRsc, FOAF.family_name, familyName);
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfoAdmin.userRsc, OntologyConstants.EMAIL_PROPERTY, email);
+							LibraryStore.getInstance().updatePropertyStringValue(
+									ShowInfoAdmin.userRsc, OntologyConstants.PASSWORD_PROPERTY, password);
+
+						
+							JOptionPane.showMessageDialog(null, "Kiþi Bilgileri Düzenlendi.");
+						
+						
+						
+					}
+				});  
+			    
+		
+		
+	}
+}
